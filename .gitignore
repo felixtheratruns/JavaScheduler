@@ -1,3 +1,6 @@
+#Compiled java class files
 *.class	
+#vim backup files
 *~	
+#vim swap files
 *.swp
