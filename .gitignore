@@ -1,4 +1,4 @@
-.class	# compiled java classes
-bin/	# bin directory
-*.*~	# vim backup files
-*.swp	# vim swap files
+.class	
+bin/	
+*.*~	
+*.swp
