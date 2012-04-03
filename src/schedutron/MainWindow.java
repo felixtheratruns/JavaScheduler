@@ -38,6 +38,14 @@ public class MainWindow extends JFrame {
   
   private JList availableList;
   private JList scheduledList;
+  
+  private static final Color[] palette = {
+    new Color(145,169,201),
+    new Color(145,201,162),
+    new Color(230,183,113)
+  };
+  /** Array for accessing cells in the grid */
+  private JLabel[][] cells; 
 
   private JPanel panel;
   // TODO: Layout and stuff
@@ -66,6 +74,7 @@ public class MainWindow extends JFrame {
     Date time = start;
     c.gridx = 0;
     c.ipady = 8;
+    c.ipadx = 24;
     numIntervals = 24; // TODO: Either generalize or make this standard
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(time);
@@ -83,8 +92,28 @@ public class MainWindow extends JFrame {
       return;
     }
     Calendar calendar = Calendar.getInstance();
+    GridBagConstraints c = new GridBagConstraints();
+    c.fill = GridBagConstraints.BOTH;
+    int numRows = 24;     // TODO: Put us somewhere nicer
+    int numCols = 7;
+    cells = new JLabel[numRows][numCols];
+    for (int row = 1; row <= numRows; row++) {
+      c.gridy = row;
+      for (int col = 1; col <= numCols; col++) {
+        c.gridx = col;
+        JLabel cell = new JLabel();
+        if (row % 2 == 0) {
+          cell.setBackground(new Color(0xd9,0xdc,0xdd));
+          cell.setOpaque(true);
+        }
+        cell.setBorder(BorderFactory.createMatteBorder(1,1,0,0,Color.BLACK));
+        panel.add(cell, c);
+        cells[row-1][col-1] = cell;
+      }
+    }
     for (Course course: schedule.getCourses()) {
       for (TimeBlock time : course.getTimes()) {
+        Color color = palette[schedule.getCourses().indexOf(course) % palette.length];
         String dayCodes = "SMTWRFU";
         calendar.setTime(time.getStart());
         int startHr = calendar.get(Calendar.HOUR_OF_DAY);
@@ -98,15 +127,16 @@ public class MainWindow extends JFrame {
         // problem?
         int endHr = calendar.get(Calendar.HOUR_OF_DAY);
         // TODO: Use better name than c... names from online examples suck!
-        GridBagConstraints c = new GridBagConstraints();
         c.gridx = dayCodes.indexOf(time.getDay()) + 1;
         c.gridy = startHr + 1;
         c.gridheight = (endHr - startHr) + 1;
         c.fill = GridBagConstraints.BOTH;
-        System.out.println(startHr + ", " + endHr + ", " + c.gridheight);
+        for (int row = c.gridy; row < c.gridy + c.gridheight; row++) {
+        	panel.remove(cells[row-1][c.gridx-1]);
+        }
         JLabel label = new JLabel(course.getNumber(), JLabel.CENTER);
-        label.setBackground(Color.GREEN); // TODO: Add color scheme?
-        label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        label.setBackground(color); 
+        label.setBorder(BorderFactory.createMatteBorder(1,1,0,0,Color.BLACK));
         label.setOpaque(true);
         panel.add(label, c);
       }
