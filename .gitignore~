@@ -1,6 +1,0 @@
-#Compiled java class files
-bin/schedutron/*.class	
-#vim backup files
-*~	
-#vim swap files
-*.swp
