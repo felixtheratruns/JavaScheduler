@@ -44,12 +44,12 @@ public class MainWindow extends JFrame {
     new Color(145,201,162),
     new Color(230,183,113)
   };
-  /** Array for accessing cells in the grid */
+
+  /** Array for accessing the grid line labels in the grid */
   private JLabel[][] cells; 
 
   private JPanel panel;
-  // TODO: Layout and stuff
-  // TODO: Add CatalogWindow
+  // TODO: Add panel for catalog and schedule
   
   private void generateGrid()
   {
@@ -83,7 +83,6 @@ public class MainWindow extends JFrame {
       panel.add(new JLabel(sdf.format(calendar.getTime())), c);
       calendar.add(Calendar.HOUR, 1);
     }
-    // TODO: Draw grid lines and/or alternate cell colors (using fill/labels?)
     drawCourses();
   }
 
@@ -155,7 +154,6 @@ public class MainWindow extends JFrame {
   }
 
   public MainWindow() {
-    // initialization
     panel = new JPanel(new GridBagLayout());
     schedule = new Schedule();
     SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");

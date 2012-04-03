@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * Stores information about the Course -- the course number, title, etc.
  * @author <a href="mailto:djsmit01@louisville.edu">Daniel J. Smith</a>
  */
 public class Course {
@@ -16,12 +17,23 @@ public class Course {
   /** The times at which the course meets */
   private ArrayList<TimeBlock> times; // TODO: Find optimal container type
 
+  /** 
+   * Create a new Course
+   * @param number -- The course's number (ie. "CECS 550")
+   * @param title -- The course's title (ie. "Software Engineering")
+   * @param dayCodes -- String containing chars (UMTWRFS) of the days the course
+   * meets at.
+   * @param start -- The time at which the course meets
+   * @param end -- The time at which the course lets out
+   * @param hours -- The number of credit hours for taking the course
+   */
   public Course ( String number, String title, String dayCodes, Date start, 
                   Date end, int hours ) {
     this.number = number;
     this.title = title;
     char[] days = dayCodes.toCharArray();
     times = new ArrayList<TimeBlock>();
+    // TODO: Validate dayString input so it's not something stupid like "VNZZ"
     for (char day : days) {
       TimeBlock time = new TimeBlock( day, start, end );
       times.add( time );
@@ -56,6 +68,11 @@ public class Course {
     this.hours = hours;
   }
 
+  /**
+   * Determine if the current course has time conflicts with a specified course
+   * @param course -- the course to be checked for conflicts
+   * @return True if there is a conflict, false otherwise
+   */
   public boolean ConflictsWith(Course course) {
     for(TimeBlock timeA : times) {
       for(TimeBlock timeB : course.getTimes()) {
@@ -67,6 +84,11 @@ public class Course {
     return false;
   }
 
+  /**
+   * Determine if the current course has time conflicts with a single time block
+   * @param time -- a timeblock to be checked for conflicts
+   * @return True if there is a conflict, false otherwise
+   */
   public boolean ConflictsWith( TimeBlock time ) {
     for(TimeBlock timeA : times) {
       if (time.ConflictsWith( timeA )) {
@@ -76,6 +98,10 @@ public class Course {
     return false;
   }
 
+  /**
+   * Overridden toString() method, string is course number and title separated 
+   * by a | (pipe) (eg. "ENGR 550 | Software Engineering")
+   */
   public String toString() {
     return number + " | " + title;
   }

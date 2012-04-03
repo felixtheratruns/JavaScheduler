@@ -8,12 +8,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Window for adding courses to the catalog
+ */
 public class AddWindow extends JFrame {
-  JPanel panel = new JPanel(new GridBagLayout());
+  /** Panel for the window, stores all the window's widgets and its layout */
+  private JPanel panel = new JPanel(new GridBagLayout());
+  /** Constraints object used for setting grid position, etc. */
   GridBagConstraints c = new GridBagConstraints();
+  /** Button object to confirm the addition */
   JButton okButton;
+  /** Button object to cancel the addition */
   JButton cancelButton;
+  // TODO: Make these buttons do something!
 
+  /** Public constructor for AddWindow, should be called from MainWindow */
   public AddWindow() {
     c.gridx = 0;
     c.gridy = 0;
