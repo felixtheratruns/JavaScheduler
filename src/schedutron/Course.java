@@ -45,7 +45,8 @@ public class Course {
   }
   
   public String getNumber() {
-    return number;
+    return number;	    
+
   }
 
   public void setNumber(String number) {

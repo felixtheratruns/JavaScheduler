@@ -1,6 +1,8 @@
 package schedutron;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.text.DateFormatSymbols;
@@ -10,11 +12,18 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 
 public class MainWindow extends JFrame {
 
@@ -22,7 +31,7 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 2278553101678377064L;
 
   // XXX: Yes, I know this is ugly, all the window's data is inside the object.
-
+  Course[] courses;
   /** The schedule currently loaded into the program */
   private Schedule schedule = new Schedule();
   /** The starting of the schedule display's range */
@@ -39,6 +48,8 @@ public class MainWindow extends JFrame {
   private JList availableList;
   private JList scheduledList;
   
+  ClassSelectorModel classSelector;
+  
   private static final Color[] palette = {
     new Color(145,169,201),
     new Color(145,201,162),
@@ -49,6 +60,8 @@ public class MainWindow extends JFrame {
   private JLabel[][] cells; 
 
   private JPanel panel;
+  private JPanel selector_panel;
+  private JPanel list_selected;
   // TODO: Add panel for catalog and schedule
   
   private void generateGrid()
@@ -148,10 +161,12 @@ public class MainWindow extends JFrame {
     return null;
   }
 
+  /// tset
   private void generateList() {
     // clear availableList data
     // clear scheduledList data
   }
+  
 
   public MainWindow() {
     panel = new JPanel(new GridBagLayout());
@@ -177,18 +192,45 @@ public class MainWindow extends JFrame {
     } catch (ParseException e) {
       e.printStackTrace();
     }
-    schedule.addCourse(course1);
-    schedule.addCourse(course2);
-    schedule.addCourse(course3);
-    schedule.addCourse(course4);
-    schedule.addCourse(course5);
+//    schedule.addCourse(course1);
+//    schedule.addCourse(course2);
+//    schedule.addCourse(course3);
+//    schedule.addCourse(course4);
+//    schedule.addCourse(course5);
+
     generateGrid();
     generateList();
-    this.add(panel);
+    this.add(panel,BorderLayout.WEST);
+
+    Course[] temp = {course1, course2, course3, course4, course5};
+    courses = temp;
+    //set up list selector for courses
+    selector_panel = new JPanel(new GridBagLayout());
+    classSelector = new ClassSelectorModel(courses);
+    classSelector.addListSelectionListener(new ClassSelectorListener());
+    classSelector.setPanel(selector_panel);
+
+    
+    this.add(selector_panel, BorderLayout.CENTER);
     pack();
   }
-  
   // TODO: Handle button clicks, etc.
+
   
+	public void valueChanged(ListSelectionEvent e) {
+		// TODO Auto-generated method stub
+	    JList<Course> list = (JList<Course>)e.getSource();
+	    updateLabel(list.getSelectedIndices());
+		System.out.println("yay");
+	}
+
+	protected void updateLabel (int[] indices) {
+		
+	    for(int i=0 ; i<indices.length;i++ )
+	    		list_selected.setToolTipText(courses[indices[i]].toString());
+	    		list_selected.setText("Image not found");
+	    }
+	}
+
   
 }
