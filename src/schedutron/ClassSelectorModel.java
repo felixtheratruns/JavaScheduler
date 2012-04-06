@@ -5,17 +5,21 @@ import java.awt.GridBagConstraints;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
 public class ClassSelectorModel implements ListSelectionModel{
-      JList<Course> list;
-      JList<Course> selected_list;
-      JPanel panel;
-      GridBagConstraints c;
-      JScrollPane listScroller; 
+    JList<Course> list;
+    static JList<Course> selected_list;
+    static JPanel panel;
+    GridBagConstraints c;
+    JScrollPane listScroller; 
+    static JScrollPane selectedListScrollPane; 
+    JSplitPane splitPane;
+
       
-	  public ClassSelectorModel(Course[] courses) {
+	public ClassSelectorModel(Course[] courses) {
 
 		    c = new GridBagConstraints();
 	        c.fill = GridBagConstraints.BOTH;
@@ -30,20 +34,38 @@ public class ClassSelectorModel implements ListSelectionModel{
 		    list.setVisibleRowCount(-1);
 		    list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		    listScroller = new JScrollPane(list);
+
+		    selected_list = new JList<Course>(); //data has type Object[]
+		    selected_list.setLayoutOrientation(JList.VERTICAL);
+		    selected_list.setVisibleRowCount(-1);
+		    selectedListScrollPane = new JScrollPane(selected_list);
+		    
+		    splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+                    listScroller, selectedListScrollPane);
 		 //   listScroller.setPreferredSize(new Dimension(250, 80));
 		  //  listScroller
-
-
-	  }
+	}
 	  
-	  public void setPanel(JPanel panel){
-			panel.add(listScroller, c);
-	  }
+	public void setPanel(JPanel panel){
+		 panel.add(splitPane, c);
+	}
 	  
-	  public JPanel getPanel(){
-		  return panel;
-	  }
+	public JPanel getPanel(){
+		 return panel;
+	}
 
+	public static void updateLabel (int[] indices, Course[] courses) {
+		Course[] selected_courses = new Course[indices.length];
+	    for(int i=0 ; i<indices.length;i++ ){
+	    	selected_courses[i] = courses[indices[i]];
+	    }
+	    
+	    selected_list.setListData(selected_courses);
+	    //= new JList(selected_courses);
+	    //selectedListScrollPane.add(selected_list);
+	    //selectedListScrollPane.repaint();
+	    ///panel.updateUI();
+	}
 	
 	@Override
 	public void addListSelectionListener(ListSelectionListener x) {

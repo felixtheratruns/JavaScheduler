@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -167,6 +168,8 @@ public class MainWindow extends JFrame {
     // clear scheduledList data
   }
   
+  
+
 
   public MainWindow() {
     panel = new JPanel(new GridBagLayout());
@@ -207,7 +210,7 @@ public class MainWindow extends JFrame {
     //set up list selector for courses
     selector_panel = new JPanel(new GridBagLayout());
     classSelector = new ClassSelectorModel(courses);
-    classSelector.addListSelectionListener(new ClassSelectorListener());
+    classSelector.addListSelectionListener(new ClassSelectorListener(courses));
     classSelector.setPanel(selector_panel);
 
     
@@ -216,21 +219,8 @@ public class MainWindow extends JFrame {
   }
   // TODO: Handle button clicks, etc.
 
-  
-	public void valueChanged(ListSelectionEvent e) {
-		// TODO Auto-generated method stub
-	    JList<Course> list = (JList<Course>)e.getSource();
-	    updateLabel(list.getSelectedIndices());
-		System.out.println("yay");
-	}
+ 
 
-	protected void updateLabel (int[] indices) {
-		
-	    for(int i=0 ; i<indices.length;i++ )
-	    		list_selected.setToolTipText(courses[indices[i]].toString());
-	    		list_selected.setText("Image not found");
-	    }
-	}
 
   
 }
