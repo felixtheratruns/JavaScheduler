@@ -2,6 +2,8 @@ package schedutron;
 
 import java.awt.GridBagConstraints;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -63,61 +65,67 @@ public class ClassSelectorModel implements ListSelectionModel{
 	public JPanel getPanel(){
 		 return panel;
 	}
-	
-
-
-
-	
-
 
 	
 	public class CourseSelectorListener implements ListSelectionListener {
-		//Course[] unselected_courses;
-	//	Course[] selected_courses;
+
 		boolean repeat = false;
 		public CourseSelectorListener(){
-		//	unselected_courses = punselected_courses;
-	//		selected_courses = pselected_courses;
 		}
 		
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 		
-		
-			//a hack to keep the valueChanged from being fired again
-			//if I add a another freaking value to the list of courses
-			//it makes no sense that it would be fired like that.
-		
-			 if (!repeat){
-				repeat = true;
-			} else {
-				repeat = false;
-				return;
-			}
-	
-			// TODO Auto-generated method stub
-			System.out.println("here is the class");
-		    System.out.println(e.getClass());
-			 
-	        JList<Course> list = (JList<Course>)e.getSource();
-	        Course newcourse = list.getSelectedValue();
-	        Course[] temp = {newcourse};
-	        mcourses_selected = concatCourses(mcourses_selected, temp);
-	        selectorListFunction(newcourse, mcourses_selected);  
+			if (e.getValueIsAdjusting() == false) {
+				if (list.getSelectedIndex() == -1) {
+				} else {
 
+					JList<Course> list = (JList<Course>)e.getSource();
+					Course newcourse = list.getSelectedValue();
+					Course[] temp = {newcourse};
+					mcourses_selected = concatCourses(mcourses_selected, temp);
+					selectorListFunction(newcourse);  
+				}
+			}
 		}
-		public void selectorListFunction (Course selected, Course[] courses) {
+		
+		
+		public Course[] removeCourse( Course deleteMe, Course[] input) {
+		    List result = new LinkedList();
+
+		    for(Course item : input)
+		        if(!deleteMe.equals(item))
+		            result.add(item);
+
+		    return (schedutron.Course[]) result.toArray(input);
+		}
+
+	/*	
+		public Course[] removeCourse(Course course, Course[] courses){
+			Course[] newCourseArr = new Course[courses.length - 1];
+			int i = 0;
+			int a = 0;
+			while(i < courses.length){
+				
+				if (a < newCourseArr.length && !newCourseArr[a].equals(courses[i])){
+					newCourseArr[a] = courses[i] ;
+					a++;
+				}
+				i++;
+			}
+			
+			return newCourseArr;
+		}
+		
+		*/
+		public void selectorListFunction (Course selected) {
 			//	Course[] selected_array = {selected};
 			//	Course[] newlist = concatCourses(courses, selected_array);
-				
-			//	list
-				
-			//	
-			    selected_list.setListData(courses);
+				mcourses_left = removeCourse(selected,mcourses_left);
+				list.setListData(mcourses_left);
+			    selected_list.setListData(mcourses_selected);
 				System.out.println("second called");
-
-
-			}
+		}
 	}
 	
 	public static <Course> Course[] concatCourses(Course[] first, Course[] second) {
