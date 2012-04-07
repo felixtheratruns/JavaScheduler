@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -32,7 +33,8 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 2278553101678377064L;
 
   // XXX: Yes, I know this is ugly, all the window's data is inside the object.
-  Course[] courses;
+ 
+
   /** The schedule currently loaded into the program */
   private Schedule schedule = new Schedule();
   /** The starting of the schedule display's range */
@@ -205,12 +207,17 @@ public class MainWindow extends JFrame {
     generateList();
     this.add(panel,BorderLayout.WEST);
 
+    Course[] courses;
     Course[] temp = {course1, course2, course3, course4, course5};
     courses = temp;
+    
+
+    Course[] unselected_courses;
+    unselected_courses = courses;
     //set up list selector for courses
     selector_panel = new JPanel(new GridBagLayout());
-    classSelector = new ClassSelectorModel(courses);
-    classSelector.addListSelectionListener(new ClassSelectorListener(courses));
+    classSelector = new ClassSelectorModel(unselected_courses);
+    classSelector.addListeners();
     classSelector.setPanel(selector_panel);
 
     
@@ -218,8 +225,13 @@ public class MainWindow extends JFrame {
     pack();
   }
   // TODO: Handle button clicks, etc.
-
- 
+  
+	public static <Course> Course[] concatCourses(Course[] first, Course[] second) {
+		  Course[] result = Arrays.copyOf(first, first.length + second.length);
+		  System.arraycopy(second, 0, result, first.length, second.length);
+		  return result;
+	}
+  
 
 
   
