@@ -57,6 +57,17 @@ public class ClassSelectorModel implements ListSelectionModel{
 		  //  listScroller
 	}
 	
+	
+	
+	public Course[] removeCourse( Course deleteMe, Course[] input) {
+	    List result = new LinkedList();
+
+	    for(Course item : input)
+	        if(!deleteMe.equals(item))
+	            result.add(item);
+
+	    return (schedutron.Course[]) result.toArray(input);
+	}
 	  
 	public void setPanel(JPanel panel){
 		 panel.add(splitPane, c);
@@ -65,7 +76,12 @@ public class ClassSelectorModel implements ListSelectionModel{
 	public JPanel getPanel(){
 		 return panel;
 	}
-
+	
+	public static <Course> Course[] concatCourses(Course[] first, Course[] second) {
+		  Course[] result = Arrays.copyOf(first, first.length + second.length);
+		  System.arraycopy(second, 0, result, first.length, second.length);
+		  return result;
+	}
 	
 	public class CourseSelectorListener implements ListSelectionListener {
 
@@ -80,8 +96,8 @@ public class ClassSelectorModel implements ListSelectionModel{
 				if (list.getSelectedIndex() == -1) {
 				} else {
 
-					JList<Course> list = (JList<Course>)e.getSource();
-					Course newcourse = list.getSelectedValue();
+					JList<Course> ret_list = (JList<Course>)e.getSource();
+					Course newcourse = ret_list.getSelectedValue();
 					Course[] temp = {newcourse};
 					mcourses_selected = concatCourses(mcourses_selected, temp);
 					selectorListFunction(newcourse);  
@@ -89,50 +105,15 @@ public class ClassSelectorModel implements ListSelectionModel{
 			}
 		}
 		
-		
-		public Course[] removeCourse( Course deleteMe, Course[] input) {
-		    List result = new LinkedList();
 
-		    for(Course item : input)
-		        if(!deleteMe.equals(item))
-		            result.add(item);
-
-		    return (schedutron.Course[]) result.toArray(input);
-		}
-
-	/*	
-		public Course[] removeCourse(Course course, Course[] courses){
-			Course[] newCourseArr = new Course[courses.length - 1];
-			int i = 0;
-			int a = 0;
-			while(i < courses.length){
-				
-				if (a < newCourseArr.length && !newCourseArr[a].equals(courses[i])){
-					newCourseArr[a] = courses[i] ;
-					a++;
-				}
-				i++;
-			}
-			
-			return newCourseArr;
-		}
-		
-		*/
 		public void selectorListFunction (Course selected) {
-			//	Course[] selected_array = {selected};
-			//	Course[] newlist = concatCourses(courses, selected_array);
 				mcourses_left = removeCourse(selected,mcourses_left);
 				list.setListData(mcourses_left);
 			    selected_list.setListData(mcourses_selected);
-				System.out.println("second called");
+
 		}
 	}
-	
-	public static <Course> Course[] concatCourses(Course[] first, Course[] second) {
-		  Course[] result = Arrays.copyOf(first, first.length + second.length);
-		  System.arraycopy(second, 0, result, first.length, second.length);
-		  return result;
-		}
+
 	
 	
 	public class CourseDeselectorListener implements ListSelectionListener {
@@ -145,52 +126,28 @@ public class ClassSelectorModel implements ListSelectionModel{
 		
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
-			// TODO Auto-generated method stub
-			
-			//a hack to keep the valueChanged from being fired again
-			//if I add a another freaking value to the list of courses
-			//it makes no sense that it would be fired like that.
-		/*
-			 if (!repeat){
-				repeat = true;
-			} else {
-				repeat = false;
-				return;
-			}
-			*/ 
 			if (e.getValueIsAdjusting() == false) {
-		        if (list.getSelectedIndex() == -1) {
+				if (selected_list.getSelectedIndex() == -1) {
+				} else {
 
-		         } else {
-			 
-				JList<Course> list = (JList<Course>)e.getSource();
-				Course newcourse = list.getSelectedValue();
-				Course[] temp = {newcourse};
-				mcourses_selected = concatCourses(mcourses_selected, temp);
-				selectedListFunction(newcourse, mcourses_selected); 
-		        }
+					JList<Course> ret_list = (JList<Course>)e.getSource();
+					Course newcourse = ret_list.getSelectedValue();
+					Course[] temp = {newcourse};
+					mcourses_left = concatCourses(mcourses_left, temp);
+					selectedListFunction(newcourse);  
+				}
 			}
-			 
-	   //     JList<Course> list = (JList)e.getSource();
-	   //     selectedListFunction(list.getSelectedIndices(),unselected_courses);  
+
 		}
 		
 
 		
-		public void selectedListFunction (Course course, Course[] courses) {
+		public void selectedListFunction (Course selected) {
 
 			//int[] indices
-			
-			
-			System.out.println("selected list called");
-			/*
-			Course[] selected_courses = new Course[indices.length];
-		    for(int i=0 ; i<indices.length;i++ ){
-		    	selected_courses[i] = courses[indices[i]];
-		    }
-		    
-		    selected_list.setListData(selected_courses);
-		    */
+			mcourses_selected = removeCourse(selected,mcourses_selected);
+			selected_list.setListData(mcourses_selected);
+		    list.setListData(mcourses_left);
 		}
 	}
 
@@ -321,7 +278,7 @@ public class ClassSelectorModel implements ListSelectionModel{
 	
 	public void addListeners(){
 	    this.addListSelectionListener(new CourseSelectorListener());
-//	    this.addListDeselectionListener(new CourseDeselectorListener());
+	    this.addListDeselectionListener(new CourseDeselectorListener());
 
 	}
 
