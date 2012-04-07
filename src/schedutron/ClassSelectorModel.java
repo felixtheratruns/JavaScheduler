@@ -1,6 +1,7 @@
 package schedutron;
 
 import java.awt.GridBagConstraints;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,50 +23,62 @@ public class ClassSelectorModel implements ListSelectionModel{
     JScrollPane listScroller; 
     static JScrollPane selectedListScrollPane; 
     JSplitPane splitPane;
-    Course[] mcourses;
-    Course[] mcourses_selected;
-    Course[] mcourses_left;
+    private DefaultListModel<Course> listmodel_selected;
+    private DefaultListModel<Course> listmodel_left;
+    ArrayList<Course> mcourses = new ArrayList<Course>();
 
+    
       
-	public ClassSelectorModel(Course[] courses) {
+	public ClassSelectorModel(ArrayList<Course> courses) {
 
 		    c = new GridBagConstraints();
 	        c.fill = GridBagConstraints.BOTH;
 	        c.weighty = 1;
 
-//		    JTextField userInput = new JTextField(20);
-//		    selector_panel.add(userInput);
 		    mcourses = courses;
-		    Course[] temp = {};
-		    mcourses_selected = temp;
-		    mcourses_left = courses;
+		    ArrayList<Course> mcourses_left = courses;
+		    
 
-		    list = new JList<Course>(courses); 
+		    listmodel_left = new DefaultListModel<Course>();
+			Course[] courseArray = new Course[mcourses_left.size()];
+		    addToListModel(mcourses_left.toArray(courseArray));
+		    list = new JList<Course>(listmodel_left);
+		    
 		    list.setLayoutOrientation(JList.VERTICAL);
 		    list.setVisibleRowCount(-1);
 		    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		    listScroller = new JScrollPane(list);
 
-		    selected_list = new JList<Course>(); 
+		    listmodel_selected = new DefaultListModel<Course>();
+		    selected_list = new JList<Course>(listmodel_selected); 
 		    selected_list.setLayoutOrientation(JList.VERTICAL);
 		    selected_list.setVisibleRowCount(-1);
 		    selectedListScrollPane = new JScrollPane(selected_list);
 		    
 		    splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                     listScroller, selectedListScrollPane);
-		 //   listScroller.setPreferredSize(new Dimension(250, 80));
-		  //  listScroller
 	}
 	
 	
+	private void addToListModel(Course[] arr_courses){
+		for(Course c : arr_courses){
+			listmodel_left.addElement(c);
+		}
+	}
+	
+	private void addToSelectedListModel(Course[] arr_courses){
+		for(Course c : arr_courses){
+			listmodel_selected.addElement(c);
+		}
+	}
 	
 	public Course[] removeCourse( Course deleteMe, Course[] input) {
-	    List result = new LinkedList();
-
-	    for(Course item : input)
-	        if(!deleteMe.equals(item))
-	            result.add(item);
-
+	    List<Course> result = new LinkedList<Course>();
+	    if (input.length > 0){
+	    	for(Course item : input)
+	    		if(!deleteMe.equals(item))
+	    			result.add(item);
+	    } 
 	    return (schedutron.Course[]) result.toArray(input);
 	}
 	  
@@ -85,7 +98,6 @@ public class ClassSelectorModel implements ListSelectionModel{
 	
 	public class CourseSelectorListener implements ListSelectionListener {
 
-		boolean repeat = false;
 		public CourseSelectorListener(){
 		}
 		
@@ -98,28 +110,18 @@ public class ClassSelectorModel implements ListSelectionModel{
 
 					JList<Course> ret_list = (JList<Course>)e.getSource();
 					Course newcourse = ret_list.getSelectedValue();
-					Course[] temp = {newcourse};
-					mcourses_selected = concatCourses(mcourses_selected, temp);
-					selectorListFunction(newcourse);  
+					listmodel_selected.addElement(newcourse);
+					listmodel_left.removeElement(newcourse);  
 				}
 			}
 		}
 		
-
-		public void selectorListFunction (Course selected) {
-				mcourses_left = removeCourse(selected,mcourses_left);
-				list.setListData(mcourses_left);
-			    selected_list.setListData(mcourses_selected);
-
-		}
 	}
 
 	
 	
 	public class CourseDeselectorListener implements ListSelectionListener {
-		Course[] unselected_courses;
-		Course[] selected_courses;
-		boolean repeat = false;
+
 		public CourseDeselectorListener(){			
 
 		}
@@ -131,23 +133,12 @@ public class ClassSelectorModel implements ListSelectionModel{
 				} else {
 
 					JList<Course> ret_list = (JList<Course>)e.getSource();
-					Course newcourse = ret_list.getSelectedValue();
-					Course[] temp = {newcourse};
-					mcourses_left = concatCourses(mcourses_left, temp);
-					selectedListFunction(newcourse);  
+					Course newcourse = ret_list.getSelectedValue();;
+					listmodel_left.addElement(newcourse);
+					listmodel_selected.removeElement(newcourse);
 				}
 			}
 
-		}
-		
-
-		
-		public void selectedListFunction (Course selected) {
-
-			//int[] indices
-			mcourses_selected = removeCourse(selected,mcourses_selected);
-			selected_list.setListData(mcourses_selected);
-		    list.setListData(mcourses_left);
 		}
 	}
 
@@ -162,6 +153,12 @@ public class ClassSelectorModel implements ListSelectionModel{
 		selected_list.addListSelectionListener(x);
 	}
 
+	public void addListeners(){
+	    this.addListSelectionListener(new CourseSelectorListener());
+	    this.addListDeselectionListener(new CourseDeselectorListener());
+
+	}
+	
 	@Override
 	public void addSelectionInterval(int index0, int index1) {
 		// TODO Auto-generated method stub
@@ -276,10 +273,6 @@ public class ClassSelectorModel implements ListSelectionModel{
 		
 	}
 	
-	public void addListeners(){
-	    this.addListSelectionListener(new CourseSelectorListener());
-	    this.addListDeselectionListener(new CourseDeselectorListener());
 
-	}
 
 }
