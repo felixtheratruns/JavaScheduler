@@ -8,14 +8,29 @@ import java.util.Date;
  * @author <a href="mailto:djsmit01@louisville.edu">Daniel J. Smith</a>
  */
 public class Course {
-  /** The course's number (ie. "CECS 550") */
-  private String number;
-  /** The course's title (ie. "Software Engineering") */
-  private String title;
-  /** The number of credit hours for taking the course */
-  private int hours;
-  /** The times at which the course meets */
-  private ArrayList<TimeBlock> times; // TODO: Find optimal container type
+	
+	private String ClassNbr;
+	private String Subj;
+	private String CatNbr; 	
+	private String Sec;
+	private String Title; 	
+	private String Days;	
+	private String Time;	
+	private String Bldg;
+	private String Enroll; 	
+	private String Wait;
+	private String Instr; 	
+	private String Units;
+	private String Location;	
+
+	/** The course's number (ie. "CECS 550") */
+  	private String number;
+  	/** The course's title (ie. "Software Engineering") */
+  	private String title;
+  	/** The number of credit hours for taking the course */
+  	private int hours;
+  	/** The times at which the course meets */
+  	private ArrayList<TimeBlock> times; // TODO: Find optimal container type
 
   /** 
    * Create a new Course
@@ -39,6 +54,36 @@ public class Course {
       times.add( time );
     }
   }
+  
+  
+  public Course (String pClassNbr, String pSubj, String pCatNbr, String pSec, 
+		  String pTitle, String pDays, String pTime, String pBldg, String pEnroll, 
+		  String pWait, String pInstr, String pUnits, String pLocation) {
+		String ClassNbr = pClassNbr;
+		String Subj = pSubj;
+		String CatNbr = pCatNbr;
+		String Sec = pSec;
+		String Title = pTitle;
+		String Days = pDays;
+		String Time = pTime;
+		String Bldg = pBldg;
+		String Enroll = pEnroll;
+		String Wait = pWait;
+		String Instr = pInstr;
+		String Units = pUnits;
+		String Location = pLocation;
+
+	  
+	/*  
+	  char[] days = dayCodes.toCharArray();
+	  times = new ArrayList<TimeBlock>();
+	  // TODO: Validate dayString input so it's not something stupid like "VNZZ"
+	  for (char day : days) {
+		  TimeBlock time = new TimeBlock( day, start, end );
+		  times.add( time );
+	  }
+	  */
+}
 	
   public ArrayList<TimeBlock> getTimes() {
     return times;

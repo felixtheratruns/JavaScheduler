@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class FileManager {
 
-	ArrayList<Class> fileList = new ArrayList<Class>();
+	ArrayList<Course> classList = new ArrayList<Course>();
 	
 	public static BufferedReader getBufferedReader(File path) throws FileNotFoundException{
 
@@ -27,6 +27,10 @@ public class FileManager {
 		return br;
 	}
 	 
+	public void test(){
+		
+	}
+	
 	public File[] getFiles(String path){
 		class OnlyExt implements FilenameFilter {
 			String ext;
@@ -43,16 +47,32 @@ public class FileManager {
 		return listOfFiles;
 	}
 
-	public void makeClasses() throws IOException{
+	public ArrayList<Course> makeClasses() throws IOException{
 		File[] files = getFiles("data");
 		for (int i = 0; i < files.length; i++) {
 			BufferedReader br = getBufferedReader(files[i]);
 			String strLine;
 			while ((strLine = br.readLine()) != null)   {
 			// Print the content on the console
-				System.out.println(strLine.split("\t")[0]);
+				String[] lines = strLine.split("\t");
+				if (lines.length == 13 ){
+					for(String line : lines){
+						line = line.trim();
+						if (line.equals("")){
+							continue;
+						}
+						System.out.println(line);
+					}
+				} else {
+					System.out.println("not 13 long");
+					for(String line : lines){
+						System.out.println(line);
+					}
+				}
 			}
+			
 		}
+		return classList;
 	}
 }
 	

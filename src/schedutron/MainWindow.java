@@ -197,6 +197,7 @@ public class MainWindow extends JFrame {
       course5 = new Course("SOC 202", "Social Problems", "T",
         sdf.parse("11:00 AM"), sdf.parse("12:15 PM"), 2);
       
+      
 
       FileManager fileMan = new FileManager();
       fileMan.makeClasses();
