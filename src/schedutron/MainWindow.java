@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.io.IOException;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -174,7 +175,7 @@ public class MainWindow extends JFrame {
   
 
 
-  public MainWindow() {
+  public MainWindow() throws IOException {
     panel = new JPanel(new GridBagLayout());
     schedule = new Schedule();
     SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
@@ -195,6 +196,11 @@ public class MainWindow extends JFrame {
         sdf.parse("9:30 AM"), sdf.parse("10:45 AM"), 3);
       course5 = new Course("SOC 202", "Social Problems", "T",
         sdf.parse("11:00 AM"), sdf.parse("12:15 PM"), 2);
+      
+
+      FileManager fileMan = new FileManager();
+      fileMan.makeClasses();
+
     } catch (ParseException e) {
       e.printStackTrace();
     }
