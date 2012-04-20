@@ -14,7 +14,8 @@ import java.util.ArrayList;
 
 public class FileManager {
 
-	ArrayList<Course> classList = new ArrayList<Course>();
+	ArrayList<Course> courseList = new ArrayList<Course>();
+
 	
 	public static BufferedReader getBufferedReader(File path) throws FileNotFoundException{
 
@@ -49,30 +50,37 @@ public class FileManager {
 
 	public ArrayList<Course> makeClasses() throws IOException{
 		File[] files = getFiles("data");
+		String l;
 		for (int i = 0; i < files.length; i++) {
 			BufferedReader br = getBufferedReader(files[i]);
 			String strLine;
 			while ((strLine = br.readLine()) != null)   {
+				ArrayList<String> line_elements = new ArrayList<String>();
+
 			// Print the content on the console
-				String[] lines = strLine.split("\t");
-				if (lines.length == 13 ){
-					for(String line : lines){
-						line = line.trim();
-						if (line.equals("")){
+				String[] line = strLine.split("\t");
+				if (line.length == 13 ){
+					ArrayList<String> els = new ArrayList<String>();
+
+					for(int a = 0; a < line.length; a++){
+						line[a] = line[a].trim();
+						if (line[a].equals("")){
 							continue;
 						}
-						System.out.println(line);
+						els.add(line[a]);
 					}
+					Course course = new Course(els);
+					courseList.add(course);
 				} else {
 					System.out.println("not 13 long");
-					for(String line : lines){
-						System.out.println(line);
+					for(String el : line){
+						System.out.println(el);
 					}
 				}
 			}
 			
 		}
-		return classList;
+		return courseList;
 	}
 }
 	

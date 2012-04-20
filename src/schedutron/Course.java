@@ -56,6 +56,32 @@ public class Course {
   }
   
   
+  public Course (ArrayList<String> l) {
+	  	ClassNbr = l.get(0);
+		Subj = l.get(1);
+		CatNbr =l.get(2);
+		Sec =l.get(3);
+		Title =l.get(4);
+		Days = l.get(5);
+		Time = l.get(6);
+		Bldg =l.get(7);
+		Enroll = l.get(8);
+		Wait = l.get(9);
+		Instr = l.get(10);
+		Units = l.get(11);
+		Location = l.get(12);
+
+	  
+	/*  
+	  char[] days = dayCodes.toCharArray();
+	  times = new ArrayList<TimeBlock>();
+	  // TODO: Validate dayString input so it's not something stupid like "VNZZ"
+	  for (char day : days) {
+		  TimeBlock time = new TimeBlock( day, start, end );
+		  times.add( time );
+	  }
+	  */
+}
   public Course (String pClassNbr, String pSubj, String pCatNbr, String pSec, 
 		  String pTitle, String pDays, String pTime, String pBldg, String pEnroll, 
 		  String pWait, String pInstr, String pUnits, String pLocation) {
@@ -84,8 +110,9 @@ public class Course {
 	  }
 	  */
 }
-	
   public ArrayList<TimeBlock> getTimes() {
+	String e;
+
     return times;
   }
   
