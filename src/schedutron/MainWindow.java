@@ -185,6 +185,7 @@ public class MainWindow extends JFrame {
     Course course3 = null;
     Course course4 = null;
     Course course5 = null;
+    ArrayList<Course> unselected_courses = null;
     try {
       course1 = new Course("CECS 550", "Software Engineering", "MW",
         sdf.parse("5:30 PM"), sdf.parse("6:45 PM"), 3);
@@ -200,7 +201,7 @@ public class MainWindow extends JFrame {
       
 
       FileManager fileMan = new FileManager();
-      fileMan.makeClasses();
+      unselected_courses = fileMan.makeClasses();
 
     } catch (ParseException e) {
       e.printStackTrace();
@@ -220,8 +221,8 @@ public class MainWindow extends JFrame {
     courses = temp;
     
 
-    ArrayList<Course> unselected_courses;
-    unselected_courses = new ArrayList<Course>(Arrays.asList(courses));
+
+    		//new ArrayList<Course>(Arrays.asList(courses));
     //set up list selector for courses
     selector_panel = new JPanel(new GridBagLayout());
     classSelector = new ClassSelectorModel(unselected_courses);

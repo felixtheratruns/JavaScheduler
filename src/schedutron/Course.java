@@ -1,5 +1,7 @@
 package schedutron;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,7 +10,6 @@ import java.util.Date;
  * @author <a href="mailto:djsmit01@louisville.edu">Daniel J. Smith</a>
  */
 public class Course {
-	
 	private String ClassNbr;
 	private String Subj;
 	private String CatNbr; 	
@@ -28,7 +29,7 @@ public class Course {
   	/** The course's title (ie. "Software Engineering") */
   	private String title;
   	/** The number of credit hours for taking the course */
-  	private int hours;
+  	private double hours;
   	/** The times at which the course meets */
   	private ArrayList<TimeBlock> times; // TODO: Find optimal container type
 
@@ -71,7 +72,55 @@ public class Course {
 		Units = l.get(11);
 		Location = l.get(12);
 
-	  
+		
+		System.out.println("class number: "+ClassNbr);
+		System.out.println("subject: "+Subj);
+		System.out.println("cat number: "+CatNbr);
+		System.out.println("sec: "+Sec);
+		System.out.println("title: "+Title);
+		System.out.println("days: "+Days);
+		System.out.println("time: "+Time);
+		System.out.println("bldg: "+Bldg);
+		System.out.println("enrol: "+Enroll);
+		System.out.println("wait: "+Wait);
+		System.out.println("instr: "+Instr);
+		System.out.println("units: "+Units);
+		System.out.println("location: "+Location);
+
+		
+		number = ClassNbr;
+		title = Title;
+		if(Units.equals("")){
+			//do nothing
+		} else {
+			hours = Double.parseDouble(Units);
+		}
+	    SimpleDateFormat sdf = new SimpleDateFormat("h:mma");
+	    if(Time.equals("TBA") || Time.equals("")){
+	    	//don't do anything
+	    }else {
+		    String[] time_block = Time.split("-");
+		    Date start = null;
+		    Date end = null;
+			try {
+				start = sdf.parse(time_block[0]);
+			    end = sdf.parse(time_block[1]);
+	
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   
+		    char[] days = Days.toCharArray();
+		    times = new ArrayList<TimeBlock>();
+		    // TODO: Validate dayString input so it's not something stupid like "VNZZ"
+		    for (char day : days) {
+		      TimeBlock time = new TimeBlock( day, start, end );
+		      times.add( time );
+		    }
+	    }
+		
+
 	/*  
 	  char[] days = dayCodes.toCharArray();
 	  times = new ArrayList<TimeBlock>();
@@ -85,19 +134,19 @@ public class Course {
   public Course (String pClassNbr, String pSubj, String pCatNbr, String pSec, 
 		  String pTitle, String pDays, String pTime, String pBldg, String pEnroll, 
 		  String pWait, String pInstr, String pUnits, String pLocation) {
-		String ClassNbr = pClassNbr;
-		String Subj = pSubj;
-		String CatNbr = pCatNbr;
-		String Sec = pSec;
-		String Title = pTitle;
-		String Days = pDays;
-		String Time = pTime;
-		String Bldg = pBldg;
-		String Enroll = pEnroll;
-		String Wait = pWait;
-		String Instr = pInstr;
-		String Units = pUnits;
-		String Location = pLocation;
+		ClassNbr = pClassNbr;
+		Subj = pSubj;
+		CatNbr = pCatNbr;
+		Sec = pSec;
+		Title = pTitle;
+		Days = pDays;
+		Time = pTime;
+		Bldg = pBldg;
+		Enroll = pEnroll;
+		Wait = pWait;
+		Instr = pInstr;
+		Units = pUnits;
+		Location = pLocation;
 
 	  
 	/*  
@@ -111,8 +160,6 @@ public class Course {
 	  */
 }
   public ArrayList<TimeBlock> getTimes() {
-	String e;
-
     return times;
   }
   
@@ -133,7 +180,7 @@ public class Course {
     this.title = title;
   }
 
-  public int getHours() {
+  public double getHours() {
     return hours;
   }
 

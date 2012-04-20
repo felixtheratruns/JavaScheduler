@@ -57,16 +57,15 @@ public class FileManager {
 			while ((strLine = br.readLine()) != null)   {
 				ArrayList<String> line_elements = new ArrayList<String>();
 
-			// Print the content on the console
 				String[] line = strLine.split("\t");
 				if (line.length == 13 ){
 					ArrayList<String> els = new ArrayList<String>();
 
 					for(int a = 0; a < line.length; a++){
 						line[a] = line[a].trim();
-						if (line[a].equals("")){
-							continue;
-						}
+					//	if (line[a].equals("")){
+					//		continue;
+					//	}
 						els.add(line[a]);
 					}
 					Course course = new Course(els);
