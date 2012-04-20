@@ -18,7 +18,6 @@ public class FileManager {
 
 	
 	public static BufferedReader getBufferedReader(File path) throws FileNotFoundException{
-
 		// Open the file that is the first 
 		// command line parameter
 		FileInputStream fstream = new FileInputStream(path);

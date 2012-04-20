@@ -1,6 +1,8 @@
 package schedutron;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.Scrollbar;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -9,9 +11,11 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -49,14 +53,24 @@ public class ClassSelectorModel implements ListSelectionModel{
 		    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		    listScroller = new JScrollPane(list);
 
+		    JScrollBar ranger = new JScrollBar(Scrollbar.HORIZONTAL);
+		    listScroller.setHorizontalScrollBar(ranger);
+		    listScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		    listScroller.setBounds(1, 1, 400, 500);
+		    //listScroller.set
+		    listScroller.setMaximumSize(new Dimension(300,500));
+		    listScroller.setPreferredSize(new Dimension(300,500));
+		    
+		    
 		    listmodel_selected = new DefaultListModel<Course>();
 		    selected_list = new JList<Course>(listmodel_selected); 
 		    selected_list.setLayoutOrientation(JList.VERTICAL);
-		    selected_list.setVisibleRowCount(-1);
+		    selected_list.setVisibleRowCount(20);
 		    selectedListScrollPane = new JScrollPane(selected_list);
 		    
 		    splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                     listScroller, selectedListScrollPane);
+		    splitPane.setBounds(10, 10, 10, 10);
 	}
 	
 	

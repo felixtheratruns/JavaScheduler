@@ -66,7 +66,6 @@ public class MainWindow extends JFrame {
 
   private JPanel panel;
   private JPanel selector_panel;
-  private JPanel list_selected;
   // TODO: Add panel for catalog and schedule
   
   private void generateGrid()
