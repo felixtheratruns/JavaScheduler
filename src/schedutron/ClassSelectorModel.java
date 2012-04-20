@@ -20,15 +20,26 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class ClassSelectorModel implements ListSelectionModel{
-    JList<Course> list;
+  
+	//list on the left
+	JList<Course> list;
+    //list on the right
     static JList<Course> selected_list;
-    static JPanel panel;
+
     GridBagConstraints c;
-    JScrollPane listScroller; 
+    
+    //scroll pane for list on the left
+    static JScrollPane listScroller; 
+    //scroll pan for list on the right
     static JScrollPane selectedListScrollPane; 
+    //the pane that holds the two lists
     JSplitPane splitPane;
+    //the list models that are used for adding and removing elements from the lists
     private DefaultListModel<Course> listmodel_selected;
     private DefaultListModel<Course> listmodel_left;
+    
+    //the list of courses passed to the constructor
+    //not used yet
     ArrayList<Course> mcourses = new ArrayList<Course>();
 
     
@@ -53,21 +64,22 @@ public class ClassSelectorModel implements ListSelectionModel{
 		    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		    listScroller = new JScrollPane(list);
 
-		    JScrollBar ranger = new JScrollBar(Scrollbar.HORIZONTAL);
-		    listScroller.setHorizontalScrollBar(ranger);
+		    //set dimensions on scoll pane so list displays correctly
 		    listScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		    listScroller.setBounds(1, 1, 400, 500);
-		    //listScroller.set
 		    listScroller.setMaximumSize(new Dimension(300,500));
 		    listScroller.setPreferredSize(new Dimension(300,500));
 		    
-		    
+		    //set up list model
 		    listmodel_selected = new DefaultListModel<Course>();
+		    //make it the model for the selected_list
 		    selected_list = new JList<Course>(listmodel_selected); 
 		    selected_list.setLayoutOrientation(JList.VERTICAL);
 		    selected_list.setVisibleRowCount(20);
+		    //make it the right scroll pane
 		    selectedListScrollPane = new JScrollPane(selected_list);
 		    
+		    //add both right and left scrollpans to the splitpane
 		    splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                     listScroller, selectedListScrollPane);
 		    splitPane.setBounds(10, 10, 10, 10);
@@ -100,10 +112,6 @@ public class ClassSelectorModel implements ListSelectionModel{
 		 panel.add(splitPane, c);
 	}
 	  
-	public JPanel getPanel(){
-		 return panel;
-	}
-	
 	public static <Course> Course[] concatCourses(Course[] first, Course[] second) {
 		  Course[] result = Arrays.copyOf(first, first.length + second.length);
 		  System.arraycopy(second, 0, result, first.length, second.length);

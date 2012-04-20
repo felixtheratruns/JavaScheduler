@@ -47,6 +47,7 @@ public class FileManager {
 		return listOfFiles;
 	}
 
+	//read in classes and make them
 	public ArrayList<Course> makeClasses() throws IOException{
 		File[] files = getFiles("data");
 		String l;
