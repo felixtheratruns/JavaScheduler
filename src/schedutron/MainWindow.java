@@ -189,9 +189,6 @@ public class MainWindow extends JFrame {
   public MainWindow() throws IOException {
     panel = new JPanel(new GridBagLayout());
     courseLabels = new ArrayList<JLabel>();
-//    JMenuBar menubar = new JMenuBar();
-//    menubar.add(new JMenu("Test Menu"));
-//    this.setJMenuBar(menubar);
     schedule = new Schedule(); //TODO: Remove me
     SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
     ArrayList<Course> unselected_courses = null;
@@ -202,8 +199,6 @@ public class MainWindow extends JFrame {
 
     generateList();
     this.add(panel,BorderLayout.WEST);
-
-    Course[] courses;
     
     //new ArrayList<Course>(Arrays.asList(courses));
     //set up list selector for courses
@@ -218,7 +213,7 @@ public class MainWindow extends JFrame {
 			drawCourses();
 		}
     });
-    this.add(selector_panel, BorderLayout.CENTER);
+    this.add(selector_panel, BorderLayout.EAST);
     pack();
   }
   // TODO: Handle button clicks, etc.

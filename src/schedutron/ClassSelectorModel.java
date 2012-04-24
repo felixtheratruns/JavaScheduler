@@ -22,20 +22,20 @@ import javax.swing.event.ListSelectionListener;
 public class ClassSelectorModel implements ListSelectionModel{
   
 	//list on the left
-	JList<Course> list;
+	JList<Course> list_left;
     //list on the right
-    static JList<Course> selected_list;
+    static JList<Course> list_right;
 
     GridBagConstraints c;
     
     //scroll pane for list on the left
-    static JScrollPane listScroller; 
+    static JScrollPane scroll_left; 
     //scroll pan for list on the right
-    static JScrollPane selectedListScrollPane; 
+    static JScrollPane scroll_right; 
     //the pane that holds the two lists
     JSplitPane splitPane;
     //the list models that are used for adding and removing elements from the lists
-    private DefaultListModel<Course> listmodel_selected;
+    private DefaultListModel<Course> listmodel_right;
     private DefaultListModel<Course> listmodel_left;
     
     //the list of courses passed to the constructor
@@ -58,32 +58,54 @@ public class ClassSelectorModel implements ListSelectionModel{
 		    listmodel_left = new DefaultListModel<Course>();
 			Course[] courseArray = new Course[mcourses_left.size()];
 		    addToListModel(mcourses_left.toArray(courseArray));
-		    list = new JList<Course>(listmodel_left);
 		    
-		    list.setLayoutOrientation(JList.VERTICAL);
-		    list.setVisibleRowCount(-1);
-		    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		    listScroller = new JScrollPane(list);
-
+		    list_left = new JList<Course>(listmodel_left);
+		    list_left.setLayoutOrientation(JList.VERTICAL);
+		    list_left.setVisibleRowCount(-1);
+		    list_left.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		    
+		    scroll_left = new JScrollPane(list_left);
 		    //set dimensions on scoll pane so list displays correctly
-		    listScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		    listScroller.setBounds(1, 1, 400, 500);
-		    listScroller.setMaximumSize(new Dimension(300,500));
-		    listScroller.setPreferredSize(new Dimension(300,500));
+		    scroll_left.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		   // scroll_left.setBounds(1, 1, 400, 500);
+
 		    
 		    //set up list model
-		    listmodel_selected = new DefaultListModel<Course>();
+		    listmodel_right = new DefaultListModel<Course>();
 		    //make it the model for the selected_list
-		    selected_list = new JList<Course>(listmodel_selected); 
-		    selected_list.setLayoutOrientation(JList.VERTICAL);
-		    selected_list.setVisibleRowCount(20);
+		    list_right = new JList<Course>(listmodel_right); 
+		    list_right.setLayoutOrientation(JList.VERTICAL);
+		    list_right.setVisibleRowCount(-1);
+		    list_right.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
 		    //make it the right scroll pane
-		    selectedListScrollPane = new JScrollPane(selected_list);
+		    scroll_right = new JScrollPane(list_right);
 		    
 		    //add both right and left scrollpans to the splitpane
+
+
+		  ///  splitPane.setBounds(10, 10, 10, 10);
+
+
+	 
+	        //Provide minimum sizes for the two components in the split pane.
+	        Dimension minimumSize = new Dimension(100, 500);
+	        scroll_left.setMinimumSize(minimumSize);
+	        scroll_right.setMinimumSize(minimumSize);
+	        scroll_left.setPreferredSize(minimumSize);
+	        scroll_right.setPreferredSize(minimumSize);
+	        
+	        Dimension maximumSize = new Dimension(200, 500);
+	        scroll_left.setMaximumSize(maximumSize);
+	        scroll_right.setMaximumSize(maximumSize);
+	 
+	        //Provide a preferred size for the split pane.
+
 		    splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-                    listScroller, selectedListScrollPane);
-		    splitPane.setBounds(10, 10, 10, 10);
+                    scroll_left, scroll_right);
+	        splitPane.setOneTouchExpandable(true);
+	        splitPane.setDividerLocation(150);
+	        splitPane.setPreferredSize(new Dimension(400, 500));
 		    takencourses = new ArrayList<Course>();
 	}
 	
@@ -96,7 +118,7 @@ public class ClassSelectorModel implements ListSelectionModel{
 	
 	private void addToSelectedListModel(Course[] arr_courses){
 		for(Course c : arr_courses){
-			listmodel_selected.addElement(c);
+			listmodel_right.addElement(c);
 		}
 	}
 	
@@ -129,12 +151,12 @@ public class ClassSelectorModel implements ListSelectionModel{
 		public void valueChanged(ListSelectionEvent e) {
 		
 			if (e.getValueIsAdjusting() == false) {
-				if (list.getSelectedIndex() == -1) {
+				if (list_left.getSelectedIndex() == -1) {
 				} else {
 
 					JList<Course> ret_list = (JList<Course>)e.getSource();
 					Course newcourse = ret_list.getSelectedValue();
-					listmodel_selected.addElement(newcourse);
+					listmodel_right.addElement(newcourse);
 					listmodel_left.removeElement(newcourse);  
 					takencourses.add(newcourse);
 				}
@@ -154,13 +176,13 @@ public class ClassSelectorModel implements ListSelectionModel{
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			if (e.getValueIsAdjusting() == false) {
-				if (selected_list.getSelectedIndex() == -1) {
+				if (list_right.getSelectedIndex() == -1) {
 				} else {
 
 					JList<Course> ret_list = (JList<Course>)e.getSource();
 					Course newcourse = ret_list.getSelectedValue();;
 					listmodel_left.addElement(newcourse);
-					listmodel_selected.removeElement(newcourse);
+					listmodel_right.removeElement(newcourse);
 					takencourses.remove(newcourse);
 				}
 			}
@@ -172,11 +194,11 @@ public class ClassSelectorModel implements ListSelectionModel{
 
 	@Override
 	public void addListSelectionListener(ListSelectionListener x) {
-		list.addListSelectionListener(x);
+		list_left.addListSelectionListener(x);
 	}
 	
 	public void addListDeselectionListener(ListSelectionListener x){
-		selected_list.addListSelectionListener(x);
+		list_right.addListSelectionListener(x);
 	}
 
 	public void addListeners(){
