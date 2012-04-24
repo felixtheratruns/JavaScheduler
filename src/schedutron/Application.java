@@ -2,6 +2,8 @@ package schedutron;
 
 import java.io.IOException;
 
+import javax.swing.JFrame;
+
 /** Main application class for JavaScheduler */
 public class Application {
   /** Main function for initializing application */
@@ -13,6 +15,8 @@ public class Application {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-    main.setVisible(true);
+	SwingMenu sm = new SwingMenu();
+	main.setJMenuBar(sm);
+	main.setVisible(true);
   }
 }

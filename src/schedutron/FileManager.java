@@ -31,6 +31,7 @@ public class FileManager {
 		
 	}
 	
+	//find all files that have the .txt extension in the data folder and return a list y
 	public File[] getFiles(String path){
 		class OnlyExt implements FilenameFilter {
 			String ext;
