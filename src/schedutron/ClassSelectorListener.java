@@ -16,7 +16,7 @@ public class ClassSelectorListener implements ListSelectionListener {
 	public void valueChanged(ListSelectionEvent e) {
 		// TODO Auto-generated method stub
         JList<Course> list = (JList)e.getSource();
-        ClassSelectorModel.updateLabel(list.getSelectedIndices(), courses);
+        // ClassSelectorModel.updateLabel(list.getSelectedIndices(), courses);
         
 	}
 	

@@ -104,9 +104,8 @@ public class MainWindow extends JFrame {
   }
 
   private void drawCourses() {
-    if (schedule.getCourses() == null) {
-      return;
-    }
+	//FIXME: This needs to remove old contents, was originally coded to be
+	//drawn once. Needs to draw multiple times.
     Calendar calendar = Calendar.getInstance();
     GridBagConstraints c = new GridBagConstraints();
     c.fill = GridBagConstraints.BOTH;
@@ -127,10 +126,12 @@ public class MainWindow extends JFrame {
         cells[row-1][col-1] = cell;
       }
     }
-    for (Course course: schedule.getCourses()) {
+    for (Course course: classSelector.takencourses) {
+      System.out.println(course.getTitle());
       for (TimeBlock time : course.getTimes()) {
-        Color color = palette[schedule.getCourses().indexOf(course) % palette.length];
+        Color color = palette[classSelector.takencourses.indexOf(course) % palette.length];
         String dayCodes = "SMTWRFU";
+        System.out.println("time.getStart(): " + time.getStart());
         calendar.setTime(time.getStart());
         int startHr = calendar.get(Calendar.HOUR_OF_DAY);
         calendar.setTime(time.getEnd());
@@ -176,59 +177,32 @@ public class MainWindow extends JFrame {
 
   public MainWindow() throws IOException {
     panel = new JPanel(new GridBagLayout());
-    schedule = new Schedule();
+    schedule = new Schedule(); //TODO: Remove me
     SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
-    // TODO: Remove hard-coded courses
-    Course course1 = null;
-    Course course2 = null;
-    Course course3 = null;
-    Course course4 = null;
-    Course course5 = null;
     ArrayList<Course> unselected_courses = null;
-    try {
-      course1 = new Course("CECS 550", "Software Engineering", "MW",
-        sdf.parse("5:30 PM"), sdf.parse("6:45 PM"), 3);
-      course2 = new Course("ENGR 330", "Linear Algebra", "MW",
-        sdf.parse("12:00 PM"), sdf.parse("12:50 PM"), 2);
-      course3 = new Course("CECS 535", "Intro to Databases", "MW",
-        sdf.parse("1:00 PM"), sdf.parse("2:15 PM"), 3);
-      course4 = new Course("ECE 412", "Intro to Embedded Systems", "TR",
-        sdf.parse("9:30 AM"), sdf.parse("10:45 AM"), 3);
-      course5 = new Course("SOC 202", "Social Problems", "T",
-        sdf.parse("11:00 AM"), sdf.parse("12:15 PM"), 2);
-      
-      
 
-      FileManager fileMan = new FileManager();
-      unselected_courses = fileMan.makeClasses();
+    FileManager fileMan = new FileManager();
+    unselected_courses = fileMan.makeClasses();
 
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-//    schedule.addCourse(course1);
-//    schedule.addCourse(course2);
-//    schedule.addCourse(course3);
-//    schedule.addCourse(course4);
-//    schedule.addCourse(course5);
 
-    generateGrid();
     generateList();
     this.add(panel,BorderLayout.WEST);
 
     Course[] courses;
-    Course[] temp = {course1, course2, course3, course4, course5};
-    courses = temp;
     
-
-
-    		//new ArrayList<Course>(Arrays.asList(courses));
+    //new ArrayList<Course>(Arrays.asList(courses));
     //set up list selector for courses
     selector_panel = new JPanel(new GridBagLayout());
     classSelector = new ClassSelectorModel(unselected_courses);
     classSelector.addListeners();
     classSelector.setPanel(selector_panel);
-
-    
+    generateGrid();
+    classSelector.addListSelectionListener(new ListSelectionListener() {
+		@Override
+		public void valueChanged(ListSelectionEvent arg0) {
+			drawCourses();
+		}
+    });
     this.add(selector_panel, BorderLayout.CENTER);
     pack();
   }
