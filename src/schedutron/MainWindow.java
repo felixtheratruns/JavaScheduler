@@ -140,6 +140,7 @@ public class MainWindow extends JFrame {
     }
     for (Course course: classSelector.takencourses) {
       System.out.println(course.getTitle());
+      if (null != course.getTimes()){
       for (TimeBlock time : course.getTimes()) {
         Color color = palette[classSelector.takencourses.indexOf(course) % palette.length];
         String dayCodes = "SMTWRFU";
@@ -171,6 +172,7 @@ public class MainWindow extends JFrame {
         panel.add(label, c);
       }
       panel.revalidate();
+      }
     }
   }
 
