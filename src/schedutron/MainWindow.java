@@ -189,9 +189,9 @@ public class MainWindow extends JFrame {
   public MainWindow() throws IOException {
     panel = new JPanel(new GridBagLayout());
     courseLabels = new ArrayList<JLabel>();
-    JMenuBar menubar = new JMenuBar();
-    menubar.add(new JMenu("Test Menu"));
-    this.setJMenuBar(menubar);
+//    JMenuBar menubar = new JMenuBar();
+//    menubar.add(new JMenu("Test Menu"));
+//    this.setJMenuBar(menubar);
     schedule = new Schedule(); //TODO: Remove me
     SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
     ArrayList<Course> unselected_courses = null;
