@@ -15,7 +15,7 @@ public class Application {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	SwingMenu sm = new SwingMenu();
+	MainMenuBar sm = new MainMenuBar();
 	main.setJMenuBar(sm);
 	main.setVisible(true);
   }

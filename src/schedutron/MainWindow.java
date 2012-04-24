@@ -72,6 +72,7 @@ public class MainWindow extends JFrame {
   {
     GridBagConstraints c = new GridBagConstraints();
     c.gridy = 0;
+    c.ipady = 8;
     c.ipadx = 64;
     DateFormatSymbols dfs = new DateFormatSymbols();
     // TODO: base this on current Calendar date and allow incrementing of weeks
