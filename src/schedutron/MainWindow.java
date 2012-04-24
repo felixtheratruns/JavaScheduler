@@ -2,7 +2,6 @@ package schedutron;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.IOException;
@@ -15,16 +14,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -53,6 +49,7 @@ public class MainWindow extends JFrame {
   private JList availableList;
   private JList scheduledList;
   
+  
   ClassSelectorModel classSelector;
   
   private static final Color[] palette = {
@@ -63,6 +60,8 @@ public class MainWindow extends JFrame {
 
   /** Array for accessing the grid line labels in the grid */
   private JLabel[][] cells; 
+  /** Array for accessing course labels in the grid */
+  private ArrayList<JLabel> courseLabels;
 
   private JPanel panel;
   private JPanel selector_panel;
@@ -104,13 +103,25 @@ public class MainWindow extends JFrame {
   }
 
   private void drawCourses() {
+	int numRows = 24;     // TODO: Put us somewhere nicer
+	int numCols = 7;
+	if (cells != null) {
+	  for (int row = 1; row <= numRows; row++) {
+		  for (int col = 1; col <= numCols; col++) {
+			  panel.remove(cells[row-1][col-1]);
+		  }
+	  }
+	}
+	for (JLabel l : courseLabels) {
+	  panel.remove(l);
+	}
+	panel.revalidate();
 	//FIXME: This needs to remove old contents, was originally coded to be
 	//drawn once. Needs to draw multiple times.
     Calendar calendar = Calendar.getInstance();
     GridBagConstraints c = new GridBagConstraints();
     c.fill = GridBagConstraints.BOTH;
-    int numRows = 24;     // TODO: Put us somewhere nicer
-    int numCols = 7;
+
     cells = new JLabel[numRows][numCols];
     for (int row = 1; row <= numRows; row++) {
       c.gridy = row;
@@ -152,11 +163,13 @@ public class MainWindow extends JFrame {
         	panel.remove(cells[row-1][c.gridx-1]);
         }
         JLabel label = new JLabel(course.getNumber(), JLabel.CENTER);
+        courseLabels.add(label);
         label.setBackground(color); 
         label.setBorder(BorderFactory.createMatteBorder(1,1,0,0,Color.BLACK));
         label.setOpaque(true);
         panel.add(label, c);
       }
+      panel.revalidate();
     }
   }
 
@@ -172,11 +185,12 @@ public class MainWindow extends JFrame {
     // clear scheduledList data
   }
   
-  
-
-
   public MainWindow() throws IOException {
     panel = new JPanel(new GridBagLayout());
+    courseLabels = new ArrayList<JLabel>();
+    JMenuBar menubar = new JMenuBar();
+    menubar.add(new JMenu("Test Menu"));
+    this.setJMenuBar(menubar);
     schedule = new Schedule(); //TODO: Remove me
     SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
     ArrayList<Course> unselected_courses = null;
