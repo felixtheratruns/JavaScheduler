@@ -1,37 +1,37 @@
-8376 	ARTH 	203 	01 	INTRODUCTION TO ART-A 	TTh 	11:00am-12:15pm 	LU137	13 of 25 	0 of 5 	Fulton, C 	3.00 	BELKNAP
-8377 	ARTH 	203 	02 	INTRODUCTION TO ART-A 	Th 	01:00pm-03:45pm 	LU137	4 of 25 	0 of 5 	Fulton, C 	3.00 	BELKNAP
+8376 	ARTH 	203 	01 	INTRODUCTION TO ART-A 	TR	11:00am-12:15pm 	LU137	13 of 25 	0 of 5 	Fulton, C 	3.00 	BELKNAP
+8377 	ARTH 	203 	02 	INTRODUCTION TO ART-A 	R	01:00pm-03:45pm 	LU137	4 of 25 	0 of 5 	Fulton, C 	3.00 	BELKNAP
 8378 	ARTH 	203 	03 	INTRODUCTION TO ART-A 	MWF 	10:00am-10:50am 	HM209	7 of 25 	0 of 5 	TBA 	3.00 	BELKNAP
 8379 	ARTH 	203 	50 	INTRODUCTION TO ART-A  This course is offered as part of the Kentucky Virtual Campus program.  The section above is delivered online over the Internet. Online courses are charged at a different hourly rate than regular courses. These rates are available at http://louisville.edu/finance/bursar/tuition. Students are charged in full for online courses according to those rates even if taking a full-time course load. 	  	TBA 	DISTNCE ED	3 of 35 	0 of 5 	Reed, D 	3.00 	DISTANCEED
-8381 	ARTH 	250 	01 	ANCIENT TO MEDIEVAL ART-A 	TTh 	09:30am-10:45am 	HM207	1 of 25 	0 of 5 	TBA 	3.00 	BELKNAP
-8383 	ARTH 	250 	02 	ANCIENT TO MEDIEVAL ART-A 	TTh 	02:30pm-03:45pm 	HM207	5 of 25 	0 of 5 	TBA 	3.00 	BELKNAP
-8384 	ARTH 	250 	03 	ANCIENT TO MEDIEVAL ART-A 	TTh 	04:00pm-05:15pm 	HM209	1 of 25 	0 of 5 	TBA 	3.00 	BELKNAP
+8381 	ARTH 	250 	01 	ANCIENT TO MEDIEVAL ART-A 	TR	09:30am-10:45am 	HM207	1 of 25 	0 of 5 	TBA 	3.00 	BELKNAP
+8383 	ARTH 	250 	02 	ANCIENT TO MEDIEVAL ART-A 	TR	02:30pm-03:45pm 	HM207	5 of 25 	0 of 5 	TBA 	3.00 	BELKNAP
+8384 	ARTH 	250 	03 	ANCIENT TO MEDIEVAL ART-A 	TR	04:00pm-05:15pm 	HM209	1 of 25 	0 of 5 	TBA 	3.00 	BELKNAP
 8385 	ARTH 	250 	50 	ANCIENT TO MEDIEVAL ART-A  This course is offered as part of the Kentucky Virtual Campus program.  The section above is delivered online over the Internet. Online courses are charged at a different hourly rate than regular courses. These rates are available at http://louisville.edu/finance/bursar/tuition. Students are charged in full for online courses according to those rates even if taking a full-time course load. 	  	TBA 	DISTNCE ED	0 of 35 	0 of 5 	Reed, D 	3.00 	DISTANCEED
 8387 	ARTH 	270 	01 	REN THROUGH MOD ART-A 	MWF 	11:00am-11:50am 	HM209	4 of 25 	0 of 5 	Hufbauer, B 	3.00 	BELKNAP
 8388 	ARTH 	270 	02 	REN THROUGH MOD ART-A 	MWF 	12:00pm-12:50pm 	HM209	0 of 25 	0 of 5 	Hufbauer, B 	3.00 	BELKNAP
-8389 	ARTH 	270 	03 	HON: REN THROUGH MOD ART-A  This section is restricted to students eligible for the Honors Program. Please call the Honors department at 852-6293 for more information. 	TTh 	09:30am-10:45am 	HM209	9 of 25 	0 of 0 	Jarosi, S 	3.00 	BELKNAP
+8389 	ARTH 	270 	03 	HON: REN THROUGH MOD ART-A  This section is restricted to students eligible for the Honors Program. Please call the Honors department at 852-6293 for more information. 	TR	09:30am-10:45am 	HM209	9 of 25 	0 of 0 	Jarosi, S 	3.00 	BELKNAP
 8392 	ARTH 	290 	50 	SURVEY OF ASIAN ART -ACD1  This course is offered as part of the Kentucky Virtual Campus program.  The section above is delivered online over the Internet. Online courses are charged at a different hourly rate than regular courses. These rates are available at http://louisville.edu/finance/bursar/tuition. Students are charged in full for online courses according to those rates even if taking a full-time course load. 	  	TBA 	DISTNCE ED	5 of 35 	0 of 5 	Reed, D 	3.00 	DISTANCEED
 1858 	HUM 	151 	01 	CREATIVITY & THE ARTS - A 	MWF 	08:00am-08:50am 	HM117	0 of 35 	0 of 5 	TBA 	3.00 	BELKNAP
 1990 	HUM 	151 	02 	CREATIVITY & THE ARTS - A 	MWF 	10:00am-10:50am 	HM119	7 of 31 	0 of 5 	TBA 	3.00 	BELKNAP
-2003 	HUM 	151 	03 	CREATIVITY & THE ARTS - A 	TTh 	11:00am-12:15pm 	HM103	7 of 31 	0 of 5 	Shugoll, L 	3.00 	BELKNAP
-2005 	HUM 	151 	04 	CREATIVITY & THE ARTS - A 	TTh 	01:00pm-02:15pm 	HM223	16 of 31 	0 of 5 	Shugoll, L 	3.00 	BELKNAP
+2003 	HUM 	151 	03 	CREATIVITY & THE ARTS - A 	TR	11:00am-12:15pm 	HM103	7 of 31 	0 of 5 	Shugoll, L 	3.00 	BELKNAP
+2005 	HUM 	151 	04 	CREATIVITY & THE ARTS - A 	TR	01:00pm-02:15pm 	HM223	16 of 31 	0 of 5 	Shugoll, L 	3.00 	BELKNAP
 4598 	HUM 	151 	05 	CREATIVITY & THE ARTS - A 	MWF 	11:00am-11:50am 	HM205	4 of 31 	0 of 5 	Frabetti, A 	3.00 	BELKNAP
-4776 	HUM 	151 	06 	HON:CREATIVITY & THE ARTS-A  This section is restricted to students eligible for the Honors Program. Please call the Honors department at 852-6293 for more information. 	TTh 	01:00pm-02:15pm 	DA108	14 of 25 	0 of 0 	Stewart, C 	3.00 	BELKNAP
+4776 	HUM 	151 	06 	HON:CREATIVITY & THE ARTS-A  This section is restricted to students eligible for the Honors Program. Please call the Honors department at 852-6293 for more information. 	TR	01:00pm-02:15pm 	DA108	14 of 25 	0 of 0 	Stewart, C 	3.00 	BELKNAP
 7096 	HUM 	151 	07 	CREATIVITY & THE ARTS - A 	MWF 	08:00am-08:50am 	HM119	0 of 35 	0 of 5 	Frabetti, A 	3.00 	BELKNAP
 2984 	MUH 	204 	01 	MUSIC IN WESTERN CIV-A 	MWF 	09:00am-09:50am 	MB263	3 of 40 	0 of 5 	Hausmann, J 	3.00 	BELKNAP
 5184 	MUH 	204 	02 	MUSIC IN WESTERN CIV-A 	MWF 	10:00am-10:50am 	MB263	1 of 40 	0 of 5 	Sprowles, M 	3.00 	BELKNAP
 2985 	MUH 	204 	03 	MUSIC IN WESTERN CIV-A 	MWF 	12:00pm-12:50pm 	MB262	4 of 40 	0 of 5 	Sprowles, M 	3.00 	BELKNAP
 2986 	MUH 	204 	04 	MUSIC IN WESTERN CIV-A 	MW 	01:00pm-02:15pm 	MB262	2 of 40 	0 of 5 	White, C 	3.00 	BELKNAP
-4073 	MUH 	204 	05 	MUSIC IN WESTERN CIV-A 	TTh 	11:00am-12:15pm 	MB135	0 of 40 	0 of 5 	Hutchinson, J 	3.00 	BELKNAP
-2987 	MUH 	204 	06 	HON:MUSIC IN WESTERN CIV-A  This section is restricted to students eligible for the Honors Program. Please call the Honors department at 852-6293 for more information. 	TTh 	01:00pm-02:15pm 	MB262	8 of 25 	0 of 0 	Ashworth, J 	3.00 	BELKNAP
-2988 	MUH 	204 	07 	MUSIC IN WESTERN CIV-A 	TTh 	02:30pm-03:45pm 	MB262	1 of 40 	0 of 5 	Potochnic, J 	3.00 	BELKNAP
+4073 	MUH 	204 	05 	MUSIC IN WESTERN CIV-A 	TR	11:00am-12:15pm 	MB135	0 of 40 	0 of 5 	Hutchinson, J 	3.00 	BELKNAP
+2987 	MUH 	204 	06 	HON:MUSIC IN WESTERN CIV-A  This section is restricted to students eligible for the Honors Program. Please call the Honors department at 852-6293 for more information. 	TR	01:00pm-02:15pm 	MB262	8 of 25 	0 of 0 	Ashworth, J 	3.00 	BELKNAP
+2988 	MUH 	204 	07 	MUSIC IN WESTERN CIV-A 	TR	02:30pm-03:45pm 	MB262	1 of 40 	0 of 5 	Potochnic, J 	3.00 	BELKNAP
 8026 	MUH 	204 	50 	MUSIC IN WESTERN CIV-A  This course is offered as part of the Kentucky Virtual Campus program.  The section above is delivered online over the Internet. Online courses are charged at a different hourly rate than regular courses. These rates are available at http://louisville.edu/finance/bursar/tuition. Students are charged in full for online courses according to those rates even if taking a full-time course load. 	  	TBA 	DISTNCE ED	0 of 40 	0 of 5 	Shadle, D 	3.00 	DISTANCEED
 2989 	MUH 	204 	75 	MUSIC IN WESTERN CIV-A 	M 	06:00pm-08:40pm 	MB140	0 of 40 	0 of 5 	Noble, S 	3.00 	BELKNAP
-7326 	MUH 	204 	96 	MUSIC IN WESTERN CIV-A  Restricted to students admitted to the A&S high school cooperative program.  This class meets at Butler High School 	Th 	10:55am-12:25pm 	LS	0 of 35 	0 of 5 	Ertz, M 	3.00 	LOCAL SCHL
+7326 	MUH 	204 	96 	MUSIC IN WESTERN CIV-A  Restricted to students admitted to the A&S high school cooperative program.  This class meets at Butler High School 	R	10:55am-12:25pm 	LS	0 of 35 	0 of 5 	Ertz, M 	3.00 	LOCAL SCHL
 2990 	MUH 	212 	01 	HISTORY OF ROCK & ROLL-A  Requires at least Sophomore standing. 	MW 	01:00pm-02:15pm 	MB161	5 of 100 	0 of 10 	Mulhall, S 	3.00 	BELKNAP
-5596 	MUH 	212 	02 	HISTORY OF ROCK & ROLL-A  Requires at least Sophomore Standing 	TTh 	11:00am-12:15pm 	MB161	8 of 100 	0 of 10 	Hausmann, J 	3.00 	BELKNAP
-4139 	MUH 	218 	01 	SURVEY OF AMERICAN JAZZ-ACD1 	TTh 	01:00pm-02:15pm 	MB161	9 of 90 	0 of 5 	Tolson, G 	3.00 	BELKNAP
+5596 	MUH 	212 	02 	HISTORY OF ROCK & ROLL-A  Requires at least Sophomore Standing 	TR	11:00am-12:15pm 	MB161	8 of 100 	0 of 10 	Hausmann, J 	3.00 	BELKNAP
+4139 	MUH 	218 	01 	SURVEY OF AMERICAN JAZZ-ACD1 	TR	01:00pm-02:15pm 	MB161	9 of 90 	0 of 5 	Tolson, G 	3.00 	BELKNAP
 7204 	PAS 	214 	50 	AFRICAN AMERICAN MUSIC - ACD1  This course is offered as part of the Kentucky Virtual Campus program.  The section above is delivered online over the Internet. Online courses are charged at a different hourly rate than regular courses. These rates are available at http://louisville.edu/finance/bursar/tuition. Students are charged in full for online courses according to those rates even if taking a full-time course load. 	  	TBA 	DISTNCE ED	6 of 45 	0 of 5 	Chenault, J 	3.00 	DISTANCEED
-1870 	PAS 	218 	01 	SURVEY OF AMERICAN JAZZ-ACD1 	TTh 	01:00pm-02:15pm 	MB161	1 of 30 	0 of 5 	Tolson, G 	3.00 	BELKNAP
+1870 	PAS 	218 	01 	SURVEY OF AMERICAN JAZZ-ACD1 	TR	01:00pm-02:15pm 	MB161	1 of 30 	0 of 5 	Tolson, G 	3.00 	BELKNAP
   	TA 	207 	01 	ENJOYMENT OF THEATRE-A  This class listed above has two components that meet at 2 different times. Select one of the section(s) below that match this section number but ends with an alphabetic suffix. When you register for that section, you will automatically be registered for this section above, and will be required to attend both meeting times. 	MW 	11:00am-11:50am 	SK102	15 of 216 	0 of 50 	Vandenbroucke, R 	  	BELKNAP
 1208 	TA 	207 	01B 	ENJOYMENT OF THEATRE-A 	F 	09:00am-09:50am 	HM112	2 of 24 	0 of 5 	Vandenbroucke, R 	3.00 	BELKNAP
 1209 	TA 	207 	01C 	ENJOYMENT OF THEATRE-A 	F 	09:00am-09:50am 	HM101	0 of 24 	0 of 5 	Vandenbroucke, R 	3.00 	BELKNAP
@@ -44,4 +44,4 @@
 4856 	TA 	207 	01L 	ENJOYMENT OF THEATRE-A 	F 	09:00am-09:50am 	DA203	0 of 24 	0 of 5 	Vandenbroucke, R 	3.00 	BELKNAP
 5947 	TA 	207 	01M 	ENJOYMENT OF THEATRE-A 	F 	11:00am-11:50am 	DA108	0 of 18 	0 of 5 	Vandenbroucke, R 	3.00 	BELKNAP
 4806 	TA 	207 	50 	ENJOYMENT OF THEATRE-A  This course is offered as part of the Kentucky Virtual Campus program.  The section above is delivered online over the Internet. Online courses are charged at a different hourly rate than regular courses. These rates are available at http://louisville.edu/finance/bursar/tuition. Students are charged in full for online courses according to those rates even if taking a full-time course load. 	  	TBA 	DISTNCE ED	3 of 50 	0 of 5 	Early, L 	3.00 	DISTANCEED
-1214 	TA 	207 	75 	ENJOYMENT OF THEATRE-A 	TTh 	05:30pm-06:50pm 	HP115	3 of 28 	0 of 5 	Railey, R 	3.00 	BELKNAP
+1214 	TA 	207 	75 	ENJOYMENT OF THEATRE-A 	TR	05:30pm-06:50pm 	HP115	3 of 28 	0 of 5 	Railey, R 	3.00 	BELKNAP

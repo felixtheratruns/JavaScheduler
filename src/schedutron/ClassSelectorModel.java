@@ -41,7 +41,8 @@ public class ClassSelectorModel implements ListSelectionModel{
     //the list of courses passed to the constructor
     //not used yet
     ArrayList<Course> mcourses = new ArrayList<Course>();
-
+    /** List of courses that are being taken */
+    public ArrayList<Course> takencourses;
     
       
 	public ClassSelectorModel(ArrayList<Course> courses) {
@@ -83,6 +84,7 @@ public class ClassSelectorModel implements ListSelectionModel{
 		    splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                     listScroller, selectedListScrollPane);
 		    splitPane.setBounds(10, 10, 10, 10);
+		    takencourses = new ArrayList<Course>();
 	}
 	
 	
@@ -134,6 +136,7 @@ public class ClassSelectorModel implements ListSelectionModel{
 					Course newcourse = ret_list.getSelectedValue();
 					listmodel_selected.addElement(newcourse);
 					listmodel_left.removeElement(newcourse);  
+					takencourses.add(newcourse);
 				}
 			}
 		}
@@ -158,6 +161,7 @@ public class ClassSelectorModel implements ListSelectionModel{
 					Course newcourse = ret_list.getSelectedValue();;
 					listmodel_left.addElement(newcourse);
 					listmodel_selected.removeElement(newcourse);
+					takencourses.remove(newcourse);
 				}
 			}
 
