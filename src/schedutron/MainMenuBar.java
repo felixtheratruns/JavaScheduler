@@ -2,6 +2,7 @@ package schedutron;
 import java.awt.MenuBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -55,18 +56,26 @@ public class MainMenuBar extends JMenuBar{
   
   openItem.addActionListener(new ActionListener()
   {
-	public void actionPerformed(ActionEvent arg0)
+	  public void actionPerformed(ActionEvent arg0)
 
-	{
-	    JFileChooser chooser = new JFileChooser("data");
-	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-	        ".txt files", "txt");
-	    chooser.setFileFilter(filter);
-	    int returnVal = chooser.showOpenDialog(getParent());
-	    if(returnVal == JFileChooser.APPROVE_OPTION) {
-	       System.out.println("You chose to open this file: " +
-	            chooser.getSelectedFile().getName());
-	    }	} 
+	  {
+		  JFileChooser chooser = new JFileChooser("data");
+		  FileNameExtensionFilter filter = new FileNameExtensionFilter(
+		     ".txt files", "txt");
+		  chooser.setFileFilter(filter);
+		  int returnVal = chooser.showOpenDialog(getParent());
+		  if(returnVal == JFileChooser.APPROVE_OPTION) {
+			  System.out.println("You chose to open this file: " +
+		    		chooser.getSelectedFile().getName());
+			  FileManager fman = new FileManager();
+			  try {
+				fman.getClassesFromFile(chooser.getSelectedFile());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		  }
+	  } 
 
   });
   
