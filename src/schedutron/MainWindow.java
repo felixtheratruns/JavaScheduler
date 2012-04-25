@@ -73,7 +73,7 @@ public class MainWindow extends JFrame {
   {
     GridBagConstraints c = new GridBagConstraints();
     c.gridy = 0;
-    c.ipady = 0;
+    c.ipady = 8;
     c.ipadx = 64;
     DateFormatSymbols dfs = new DateFormatSymbols();
     // TODO: base this on current Calendar date and allow incrementing of weeks
@@ -155,8 +155,9 @@ public class MainWindow extends JFrame {
         System.out.println(calendar.get(Calendar.MINUTE));
         // offset by -1 minutes so times on the hour don't fill in end hours
         // (ie. prevent an event that ends at 12 from looking like it ends at 1)
-       // calendar.add(Calendar.MINUTE, -1);
         calendar.setTime(time.getEnd());
+        calendar.add(Calendar.MINUTE, -1);
+
 
         // TODO: Better rounding method? Should a course that ends at 12:05 
         // render as ending at 12:00 or 1:00? Or should we change the division
