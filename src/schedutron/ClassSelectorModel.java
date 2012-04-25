@@ -164,6 +164,8 @@ public class ClassSelectorModel implements ListSelectionModel{
 						listeningWindow.updateInformation();
 						// TODO: is there some way to iterate through all the courses? takencourses seems redundant
 					} else {
+						ret_list.clearSelection(); //Otherwise, it will be irritating to add again
+						// TODO: Display a dialog window to the user instead of printing to the console
 						System.out.println("Courses conflict!");
 					}
 					
