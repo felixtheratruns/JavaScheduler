@@ -1,3 +1,4 @@
+
 package schedutron;
 
 import java.awt.BorderLayout;
@@ -142,7 +143,7 @@ public class MainWindow extends JFrame {
     for (Course course: classSelector.takencourses) {
       System.out.println(course.getTitle());
       //temporary check
-      if (null != course.getTimes()){
+      if (null != course.getTimes())
       for (TimeBlock time : course.getTimes()) {
         Color color = palette[classSelector.takencourses.indexOf(course) % palette.length];
         String dayCodes = "UMTWRFS";
@@ -172,9 +173,8 @@ public class MainWindow extends JFrame {
         label.setOpaque(true);
         panel.add(label, c);
       }
-      panel.revalidate();
-      }
     }
+    panel.revalidate();
   }
 
   private JLabel MapBlock(TimeBlock block) {
@@ -200,7 +200,6 @@ public class MainWindow extends JFrame {
     FileManager fileMan = new FileManager();
     unselected_courses = fileMan.getAllClassesInData();
 
-
     generateList();
     this.add(panel,BorderLayout.WEST);
     
@@ -220,16 +219,10 @@ public class MainWindow extends JFrame {
         if (e.getValueIsAdjusting() == false) {
           if (((JList<Course>)e.getSource()).getSelectedIndex() == -1) {
           } else {
-	            JList<Course> ret_list = (JList<Course>)e.getSource();
-	            Course newcourse = ret_list.getSelectedValue();
-				if (!ClassSelectorModel.scheduleConflicts(
-						ClassSelectorModel.listmodel_right,newcourse)
-						)
-			{
-
-	            classSelector.takencourses.add(newcourse);
-	            drawCourses();
-			}
+            JList<Course> ret_list = (JList<Course>)e.getSource();
+            Course newcourse = ret_list.getSelectedValue();
+            classSelector.takencourses.add(newcourse);
+            drawCourses();
           }
         }
       }
@@ -271,7 +264,6 @@ public class MainWindow extends JFrame {
 							ClassSelectorModel.listmodel_right,newcourse)
 							)
 					{
-						
 						drawCourses();
 					}
 				}
@@ -280,7 +272,8 @@ public class MainWindow extends JFrame {
 		
 	}
   
-
+  // TODO: Handle button clicks, etc.
+  
 	public static <Course> Course[] concatCourses(Course[] first, Course[] second) {
 		  Course[] result = Arrays.copyOf(first, first.length + second.length);
 		  System.arraycopy(second, 0, result, first.length, second.length);
