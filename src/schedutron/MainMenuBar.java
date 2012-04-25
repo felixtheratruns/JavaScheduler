@@ -61,7 +61,7 @@ public class MainMenuBar extends JMenuBar{
 	  {
 		  JFileChooser chooser = new JFileChooser(".");
 		  FileNameExtensionFilter filter = new FileNameExtensionFilter(
-		     ".txt files");
+		     ".txt files", "txt");
 		  chooser.setFileFilter(filter);
 		  int returnVal = chooser.showOpenDialog(getParent());
 		  if(returnVal == JFileChooser.APPROVE_OPTION) {

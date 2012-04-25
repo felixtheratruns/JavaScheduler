@@ -73,7 +73,7 @@ public class MainWindow extends JFrame {
   {
     GridBagConstraints c = new GridBagConstraints();
     c.gridy = 0;
-    c.ipady = 8;
+    c.ipady = 0;
     c.ipadx = 64;
     DateFormatSymbols dfs = new DateFormatSymbols();
     // TODO: base this on current Calendar date and allow incrementing of weeks
@@ -92,21 +92,21 @@ public class MainWindow extends JFrame {
     }
     Date time = start;
     c.gridx = 0;
-    c.ipady = 8;
+    c.ipady = 0;
     c.ipadx = 24;
-    numIntervals = 24; // TODO: Either generalize or make this standard
+    numIntervals = 48; // TODO: Either generalize or make this standard
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(time);
     for ( int i = 1; i <= numIntervals; i++ ) {
       c.gridy = i;
       panel.add(new JLabel(sdf.format(calendar.getTime())), c);
-      calendar.add(Calendar.HOUR, 1);
+      calendar.add(Calendar.MINUTE, 30);
     }
     drawCourses();
   }
 
   private void drawCourses() {
-    int numRows = 24;
+    int numRows = 48;
     int numCols = 7;
     if (cells != null) {
       for (int row = 1; row <= numRows; row++) {
@@ -150,20 +150,25 @@ public class MainWindow extends JFrame {
         System.out.println("Start time: " + time.getStart());
         System.out.println("End time: " + time.getEnd());
         calendar.setTime(time.getStart());
-        int startHr = calendar.get(Calendar.HOUR_OF_DAY);
-        calendar.setTime(time.getEnd());
+        int startHr = calendar.get(Calendar.HOUR_OF_DAY)*2 + calendar.get(Calendar.MINUTE)/30;
+        System.out.println("time::"+time.getEnd().toString());
+        System.out.println(calendar.get(Calendar.MINUTE));
         // offset by -1 minutes so times on the hour don't fill in end hours
         // (ie. prevent an event that ends at 12 from looking like it ends at 1)
-        calendar.add(Calendar.MINUTE, -1);
+       // calendar.add(Calendar.MINUTE, -1);
+        calendar.setTime(time.getEnd());
+
         // TODO: Better rounding method? Should a course that ends at 12:05 
         // render as ending at 12:00 or 1:00? Or should we change the division
         // to 30 minutes to avoid (at least for most purposes at U of L) this 
         // problem?
-        int endHr = calendar.get(Calendar.HOUR_OF_DAY);
+        int endHr = 2*calendar.get(Calendar.HOUR_OF_DAY)+ calendar.get(Calendar.MINUTE)/30;
+        
+       // System.out.println("end hour........."+calendar.get(Calendar.MINUTE));
         // TODO: Use better name than c... names from online examples suck!
         c.gridx = dayCodes.indexOf(time.getDay()) + 1;
-        c.gridy = startHr + 1;
-        c.gridheight = (endHr - startHr) + 1;
+        c.gridy = startHr+1;
+        c.gridheight = (endHr - startHr)+1;
         c.fill = GridBagConstraints.BOTH;
         for (int row = c.gridy; row < c.gridy + c.gridheight; row++) {
         	panel.remove(cells[row-1][c.gridx-1]);

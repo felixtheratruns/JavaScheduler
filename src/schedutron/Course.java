@@ -245,7 +245,7 @@ public class Course {
    * by a | (pipe) (eg. "ENGR 550 | Software Engineering")
    */
   public String toString() {
-    return number + " | " + title;
+    return number  + " | " + title + " | " + Days + " " + Time;
   }
   
   public String toFile() {
