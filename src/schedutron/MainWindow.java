@@ -146,6 +146,8 @@ public class MainWindow extends JFrame {
       for (TimeBlock time : course.getTimes()) {
         Color color = palette[classSelector.takencourses.indexOf(course) % palette.length];
         String dayCodes = "UMTWRFS";
+        System.out.println("Start time: " + time.getStart());
+        System.out.println("End time: " + time.getEnd());
         calendar.setTime(time.getStart());
         int startHr = calendar.get(Calendar.HOUR_OF_DAY);
         calendar.setTime(time.getEnd());
@@ -208,69 +210,14 @@ public class MainWindow extends JFrame {
     selector_panel = new JPanel(new GridBagLayout());
     classSelector = new ClassSelectorModel(unselected_courses);
     classSelector.addListeners();
+    classSelector.addListeningWindow(this);
     classSelector.setPanel(selector_panel);
     generateGrid();
 
-    classSelector.list_left.addListSelectionListener(new ListSelectionListener() {
-      // TODO: This is getting big, refactor to class, or pull the 
-      // CourseSelectorListener class out of ClassSelectorModel
-      @Override
-      public void valueChanged(ListSelectionEvent e) {
-        if (e.getValueIsAdjusting() == false) {
-          if (((JList<Course>)e.getSource()).getSelectedIndex() == -1) {
-          } else {
-            JList<Course> ret_list = (JList<Course>)e.getSource();
-            Course newcourse = ret_list.getSelectedValue();
-            classSelector.takencourses.add(newcourse);
-            drawCourses();
-          }
-        }
-      }
-    });
-    classSelector.list_right.addListSelectionListener(new ListSelectionListener() {
-      // TODO: This is getting big, refactor to class, or pull the 
-      // CourseSelectorListener class out of ClassSelectorModel
-      @Override
-      public void valueChanged(ListSelectionEvent e) {
-        if (e.getValueIsAdjusting() == false) {
-          if (((JList<Course>)e.getSource()).getSelectedIndex() == -1) {
-          } else {
-            JList<Course> ret_list = (JList<Course>)e.getSource();
-            Course newcourse = ret_list.getSelectedValue();
-            classSelector.takencourses.remove(newcourse);
-            drawCourses();
-          }
-        }
-      }
-    });
     this.add(selector_panel, BorderLayout.EAST);
     pack();
   }
-  
-	public class ScheduleListener implements ListSelectionListener {
-
-		public ScheduleListener(){
-		}
-		
-		@Override
-		public void valueChanged(ListSelectionEvent e) {
-		
-			if (e.getValueIsAdjusting() == false) {
-				if (ClassSelectorModel.list_left.getSelectedIndex() == -1) {
-				} else {
-					JList<Course> ret_list = (JList<Course>)e.getSource();
-					Course newcourse = ret_list.getSelectedValue();
-					if (!ClassSelectorModel.scheduleConflicts(
-							ClassSelectorModel.listmodel_right,newcourse)
-							)
-					{
-						drawCourses();
-					}
-				}
-			}
-		}
-		
-	}
+ 
   
   // TODO: Handle button clicks, etc.
   
@@ -278,6 +225,11 @@ public class MainWindow extends JFrame {
 		  Course[] result = Arrays.copyOf(first, first.length + second.length);
 		  System.arraycopy(second, 0, result, first.length, second.length);
 		  return result;
+	}
+	
+	/** To be called when the courses are updated */
+	public void updateInformation() {
+	  drawCourses();
 	}
   
 

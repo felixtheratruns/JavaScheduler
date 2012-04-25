@@ -3,6 +3,7 @@ package schedutron;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -186,6 +187,24 @@ public class Course {
 
   public void setHours(int hours) {
     this.hours = hours;
+  }
+
+  /**
+   * Determine if the current course has time conflicts with any course in a set
+   * of courses
+   * @param takencourses -- the courses to be checked for conflicts
+   * @return True if there is a conflict, false otherwise
+   */
+  public boolean ConflictsWith(Iterable<Course> takencourses) {
+	if (takencourses == null) {
+		return false;
+	}
+    for(Course course : takencourses) {
+      if ( this.ConflictsWith( course ) ) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
