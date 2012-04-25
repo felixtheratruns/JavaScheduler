@@ -104,21 +104,21 @@ public class MainWindow extends JFrame {
   }
 
   private void drawCourses() {
-	int numRows = 24;     // TODO: Put us somewhere nicer
-	int numCols = 7;
-	if (cells != null) {
-	  for (int row = 1; row <= numRows; row++) {
-		  for (int col = 1; col <= numCols; col++) {
-			  panel.remove(cells[row-1][col-1]);
-		  }
-	  }
-	}
-	for (JLabel l : courseLabels) {
-	  panel.remove(l);
-	}
-	panel.revalidate();
-	//FIXME: This needs to remove old contents, was originally coded to be
-	//drawn once. Needs to draw multiple times.
+    int numRows = 24;
+    int numCols = 7;
+    if (cells != null) {
+      for (int row = 1; row <= numRows; row++) {
+        for (int col = 1; col <= numCols; col++) {
+          panel.remove(cells[row-1][col-1]);
+        }
+      }
+    }
+    for (JLabel l : courseLabels) {
+      panel.remove(l);
+    }
+    panel.revalidate();
+    //FIXME: This needs to remove old contents, was originally coded to be
+    //drawn once. Needs to draw multiple times.
     Calendar calendar = Calendar.getInstance();
     GridBagConstraints c = new GridBagConstraints();
     c.fill = GridBagConstraints.BOTH;
@@ -143,8 +143,7 @@ public class MainWindow extends JFrame {
       if (null != course.getTimes()){
       for (TimeBlock time : course.getTimes()) {
         Color color = palette[classSelector.takencourses.indexOf(course) % palette.length];
-        String dayCodes = "SMTWRFU";
-        System.out.println("time.getStart(): " + time.getStart());
+        String dayCodes = "UMTWRFS";
         calendar.setTime(time.getStart());
         int startHr = calendar.get(Calendar.HOUR_OF_DAY);
         calendar.setTime(time.getEnd());
@@ -189,6 +188,7 @@ public class MainWindow extends JFrame {
   }
   
   public MainWindow() throws IOException {
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     panel = new JPanel(new GridBagLayout());
     courseLabels = new ArrayList<JLabel>();
     schedule = new Schedule(); //TODO: Remove me
@@ -209,11 +209,37 @@ public class MainWindow extends JFrame {
     classSelector.addListeners();
     classSelector.setPanel(selector_panel);
     generateGrid();
-    classSelector.addListSelectionListener(new ListSelectionListener() {
-		@Override
-		public void valueChanged(ListSelectionEvent arg0) {
-			drawCourses();
-		}
+    classSelector.list_left.addListSelectionListener(new ListSelectionListener() {
+      // TODO: This is getting big, refactor to class, or pull the 
+      // CourseSelectorListener class out of ClassSelectorModel
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting() == false) {
+          if (((JList<Course>)e.getSource()).getSelectedIndex() == -1) {
+          } else {
+            JList<Course> ret_list = (JList<Course>)e.getSource();
+            Course newcourse = ret_list.getSelectedValue();
+            classSelector.takencourses.add(newcourse);
+            drawCourses();
+          }
+        }
+      }
+    });
+    classSelector.list_right.addListSelectionListener(new ListSelectionListener() {
+      // TODO: This is getting big, refactor to class, or pull the 
+      // CourseSelectorListener class out of ClassSelectorModel
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting() == false) {
+          if (((JList<Course>)e.getSource()).getSelectedIndex() == -1) {
+          } else {
+            JList<Course> ret_list = (JList<Course>)e.getSource();
+            Course newcourse = ret_list.getSelectedValue();
+            classSelector.takencourses.remove(newcourse);
+            drawCourses();
+          }
+        }
+      }
     });
     this.add(selector_panel, BorderLayout.EAST);
     pack();

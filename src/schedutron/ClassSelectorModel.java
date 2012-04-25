@@ -23,27 +23,26 @@ public class ClassSelectorModel implements ListSelectionModel{
   
 	//list on the left
 	JList<Course> list_left;
-    //list on the right
-    static JList<Course> list_right;
+  //list on the right
+  static JList<Course> list_right;
 
-    GridBagConstraints c;
+  GridBagConstraints c;
+  
+  //scroll pane for list on the left
+  static JScrollPane scroll_left; 
+  //scroll pan for list on the right
+  static JScrollPane scroll_right; 
+  //the pane that holds the two lists
+  JSplitPane splitPane;
+  //the list models that are used for adding and removing elements from the lists
+  private DefaultListModel<Course> listmodel_right;
+  private DefaultListModel<Course> listmodel_left;
     
-    //scroll pane for list on the left
-    static JScrollPane scroll_left; 
-    //scroll pan for list on the right
-    static JScrollPane scroll_right; 
-    //the pane that holds the two lists
-    JSplitPane splitPane;
-    //the list models that are used for adding and removing elements from the lists
-    private DefaultListModel<Course> listmodel_right;
-    private DefaultListModel<Course> listmodel_left;
-    
-    //the list of courses passed to the constructor
-    //not used yet
-    ArrayList<Course> mcourses = new ArrayList<Course>();
-    /** List of courses that are being taken */
-    public ArrayList<Course> takencourses;
-    
+  //the list of courses passed to the constructor
+  //not used yet
+  ArrayList<Course> mcourses = new ArrayList<Course>();
+  /** List of courses that are being taken */
+  public ArrayList<Course> takencourses;
       
 	public ClassSelectorModel(ArrayList<Course> courses) {
 
@@ -158,7 +157,6 @@ public class ClassSelectorModel implements ListSelectionModel{
 					Course newcourse = ret_list.getSelectedValue();
 					listmodel_right.addElement(newcourse);
 					listmodel_left.removeElement(newcourse);  
-					takencourses.add(newcourse);
 				}
 			}
 		}
