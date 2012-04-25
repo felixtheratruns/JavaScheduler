@@ -76,9 +76,10 @@ public class MainMenuBar extends JMenuBar{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			  ClassSelectorModel.emptyLists();
-			  ClassSelectorModel.addToLeftList(courses);
-			  
+			if (courses != null){
+				ClassSelectorModel.emptyLists();
+				ClassSelectorModel.addToLeftList(courses);
+			}
 		  }
 	  } 
 
