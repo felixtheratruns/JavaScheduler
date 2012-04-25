@@ -2,7 +2,6 @@ package schedutron;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.Scrollbar;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -10,8 +9,8 @@ import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
@@ -164,8 +163,9 @@ public class ClassSelectorModel implements ListSelectionModel{
 						listeningWindow.updateInformation();
 						// TODO: is there some way to iterate through all the courses? takencourses seems redundant
 					} else {
-						ret_list.clearSelection(); //Otherwise, it will be irritating to add again
-						// TODO: Display a dialog window to the user instead of printing to the console
+						ret_list.clearSelection(); //Otherwise, it will stay selected and be irritating to try adding again.
+						String errorMsg = "This course conflicts with your current schedule:" + newcourse.getNumber();
+						JOptionPane.showMessageDialog(listeningWindow, errorMsg);
 						System.out.println("Courses conflict!");
 					}
 					
