@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainMenuBar extends JMenuBar{
 
@@ -57,8 +58,15 @@ public class MainMenuBar extends JMenuBar{
 	public void actionPerformed(ActionEvent arg0)
 
 	{
-		System.out.println("You clicked on the open action");
-	} 
+	    JFileChooser chooser = new JFileChooser("data");
+	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+	        ".txt files", "txt");
+	    chooser.setFileFilter(filter);
+	    int returnVal = chooser.showOpenDialog(getParent());
+	    if(returnVal == JFileChooser.APPROVE_OPTION) {
+	       System.out.println("You chose to open this file: " +
+	            chooser.getSelectedFile().getName());
+	    }	} 
 
   });
   

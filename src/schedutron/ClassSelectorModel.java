@@ -155,7 +155,6 @@ public class ClassSelectorModel implements ListSelectionModel{
 				}
 			}
 		}
-		
 	}
 
 	public static boolean scheduleConflicts(DefaultListModel<Course> model, Course course){

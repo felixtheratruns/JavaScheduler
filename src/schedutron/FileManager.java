@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class FileManager {
 
-	ArrayList<Course> courseList = new ArrayList<Course>();
+	private ArrayList<Course> courseList = new ArrayList<Course>();
 
 	
 	public static BufferedReader getBufferedReader(File path) throws FileNotFoundException{
