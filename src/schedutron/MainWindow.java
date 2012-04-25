@@ -142,7 +142,7 @@ public class MainWindow extends JFrame {
     for (Course course: classSelector.takencourses) {
       System.out.println(course.getTitle());
       //temporary check
-      if (null != course.getTimes()){
+      if (null != course.getTimes())
       for (TimeBlock time : course.getTimes()) {
         Color color = palette[classSelector.takencourses.indexOf(course) % palette.length];
         String dayCodes = "UMTWRFS";
@@ -172,9 +172,8 @@ public class MainWindow extends JFrame {
         label.setOpaque(true);
         panel.add(label, c);
       }
-      panel.revalidate();
-      }
     }
+    panel.revalidate();
   }
 
   private JLabel MapBlock(TimeBlock block) {

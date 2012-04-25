@@ -159,7 +159,6 @@ public class ClassSelectorModel implements ListSelectionModel{
 					if (!scheduleConflicts(listmodel_right,newcourse)){
 						listmodel_right.addElement(newcourse);
 						listmodel_left.removeElement(newcourse);  
-						takencourses.add(newcourse);
 					}
 
 				}
@@ -196,7 +195,6 @@ public class ClassSelectorModel implements ListSelectionModel{
 					Course newcourse = ret_list.getSelectedValue();;
 					listmodel_left.addElement(newcourse);
 					listmodel_right.removeElement(newcourse);
-					takencourses.remove(newcourse);
 				}
 			}
 
