@@ -194,6 +194,9 @@ public class Course {
    * @return True if there is a conflict, false otherwise
    */
   public boolean ConflictsWith(Course course) {
+	if (times == null || null == course.getTimes()){
+		return false;
+	}
     for(TimeBlock timeA : times) {
       for(TimeBlock timeB : course.getTimes()) {
         if ( timeA.ConflictsWith( timeB ) ) {

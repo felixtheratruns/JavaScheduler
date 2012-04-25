@@ -22,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
 public class ClassSelectorModel implements ListSelectionModel{
   
 	//list on the left
-	JList<Course> list_left;
+	static JList<Course> list_left;
     //list on the right
     static JList<Course> list_right;
 
@@ -35,8 +35,8 @@ public class ClassSelectorModel implements ListSelectionModel{
     //the pane that holds the two lists
     JSplitPane splitPane;
     //the list models that are used for adding and removing elements from the lists
-    private DefaultListModel<Course> listmodel_right;
-    private DefaultListModel<Course> listmodel_left;
+    static DefaultListModel<Course> listmodel_right;
+    static DefaultListModel<Course> listmodel_left;
     
     //the list of courses passed to the constructor
     //not used yet
@@ -153,18 +153,29 @@ public class ClassSelectorModel implements ListSelectionModel{
 			if (e.getValueIsAdjusting() == false) {
 				if (list_left.getSelectedIndex() == -1) {
 				} else {
-
 					JList<Course> ret_list = (JList<Course>)e.getSource();
 					Course newcourse = ret_list.getSelectedValue();
-					listmodel_right.addElement(newcourse);
-					listmodel_left.removeElement(newcourse);  
-					takencourses.add(newcourse);
+					if (!scheduleConflicts(listmodel_right,newcourse)){
+						listmodel_right.addElement(newcourse);
+						listmodel_left.removeElement(newcourse);  
+						takencourses.add(newcourse);
+					}
 				}
 			}
 		}
 		
 	}
 
+	public static boolean scheduleConflicts(DefaultListModel<Course> model, Course course){
+		for(int i=0; i < model.getSize(); i++){
+			if (course.ConflictsWith(model.getElementAt(i))){
+				System.out.println("This course conflicts<><><><><>");
+				return true;
+			}
+		}
+		return false;
+		
+	}
 	
 	
 	public class CourseDeselectorListener implements ListSelectionListener {
