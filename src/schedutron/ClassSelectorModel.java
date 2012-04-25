@@ -66,10 +66,7 @@ public class ClassSelectorModel implements ListSelectionModel{
 		    list_left.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		    
 		    scroll_left = new JScrollPane(list_left);
-		    //set dimensions on scoll pane so list displays correctly
 		    scroll_left.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		   // scroll_left.setBounds(1, 1, 400, 500);
-
 		    
 		    //set up list model
 		    listmodel_right = new DefaultListModel<Course>();
@@ -81,13 +78,6 @@ public class ClassSelectorModel implements ListSelectionModel{
 
 		    //make it the right scroll pane
 		    scroll_right = new JScrollPane(list_right);
-		    
-		    //add both right and left scrollpans to the splitpane
-
-
-		  ///  splitPane.setBounds(10, 10, 10, 10);
-
-
 	 
 	        //Provide minimum sizes for the two components in the split pane.
 	        Dimension minimumSize = new Dimension(100, 500);
@@ -100,12 +90,12 @@ public class ClassSelectorModel implements ListSelectionModel{
 	        scroll_left.setMaximumSize(maximumSize);
 	        scroll_right.setMaximumSize(maximumSize);
 	 
-	        //Provide a preferred size for the split pane.
-
 		    splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                     scroll_left, scroll_right);
 	        splitPane.setOneTouchExpandable(true);
 	        splitPane.setDividerLocation(150);
+	        
+	        //Provide a preferred size for the split pane.
 	        splitPane.setPreferredSize(new Dimension(400, 500));
 		    takencourses = new ArrayList<Course>();
 	}
