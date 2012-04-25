@@ -228,5 +228,37 @@ public class Course {
   public String toString() {
     return number + " | " + title;
   }
+  
+  public String toFile() {
+	    StringBuffer sb = new StringBuffer();
+	    sb.append(ClassNbr);
+	    sb.append("\t");
+	    sb.append(Subj);
+	    sb.append("\t");
+	    sb.append(CatNbr);
+	    sb.append("\t");
+	    sb.append(Sec);
+	    sb.append("\t");
+	    sb.append(Title);
+	    sb.append("\t");
+	    sb.append(Days);
+	    sb.append("\t");
+	    sb.append(Time);
+	    sb.append("\t");
+	    sb.append(Bldg);
+	    sb.append("\t");
+	    sb.append(Enroll);
+	    sb.append("\t");
+	    sb.append(Wait);
+	    sb.append("\t");
+	    sb.append(Instr);
+	    sb.append("\t");
+	    sb.append(Units);
+	    sb.append("\t");
+	    sb.append(Location);
+	    sb.append("\n");
+	    return sb.toString();
+  }
+
 
 }

@@ -47,9 +47,8 @@ public class MainMenuBar extends JMenuBar{
   newItem.addActionListener(new ActionListener()
   {
 	public void actionPerformed(ActionEvent arg0)
-
 	{
-		System.out.println("You clicked on the new action");
+		ClassSelectorModel.emptyLists();
 	} 
 
   });
@@ -60,7 +59,7 @@ public class MainMenuBar extends JMenuBar{
 	  public void actionPerformed(ActionEvent arg0)
 
 	  {
-		  JFileChooser chooser = new JFileChooser("data");
+		  JFileChooser chooser = new JFileChooser(".");
 		  FileNameExtensionFilter filter = new FileNameExtensionFilter(
 		     ".txt files", "txt");
 		  chooser.setFileFilter(filter);
@@ -87,12 +86,10 @@ public class MainMenuBar extends JMenuBar{
   
   closeItem.addActionListener(new ActionListener()
   {
-	public void actionPerformed(ActionEvent arg0)
-
-	{
-		System.out.println("You clicked on the close action");
-	} 
-
+	  public void actionPerformed(ActionEvent arg0)
+	  {
+		  System.exit(0);
+	  } 
   });
   
   saveItem.addActionListener(new ActionListener()
@@ -100,8 +97,24 @@ public class MainMenuBar extends JMenuBar{
 	public void actionPerformed(ActionEvent arg0)
 
 	{
-		System.out.println("You clicked on the save action");
-	} 
+	JFileChooser chooser = new JFileChooser(".");
+
+	int returnVal = chooser.showSaveDialog(getParent());
+	if(returnVal == JFileChooser.APPROVE_OPTION) {
+		System.out.println("You chose to save to this file: " +
+			chooser.getSelectedFile().getName());
+		FileManager fman = new FileManager();
+		try {
+			fman.writeToFile(chooser.getSelectedFile(),
+					ClassSelectorModel.getSelected());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	}
 
   });
 

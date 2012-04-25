@@ -101,6 +101,14 @@ public class ClassSelectorModel implements ListSelectionModel{
 	}
 	
 	
+	public static ArrayList<Course> getSelected(){
+		ArrayList<Course> select_courses = new ArrayList<Course>();
+		for(int i=0; i < listmodel_right.getSize(); i++){
+			select_courses.add(listmodel_right.get(i));
+		}
+		return select_courses;
+	}
+	
 	public static void addToLeftList(ArrayList<Course> mcourses_left){ 
 		Course[] courseArray = new Course[mcourses_left.size()];
 	    addToLeftListModel(mcourses_left.toArray(courseArray));

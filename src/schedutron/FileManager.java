@@ -1,10 +1,12 @@
 package schedutron;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -85,7 +87,18 @@ public class FileManager {
 		}
 		return courses;
 	}
-
+	
+	public void writeToFile(File file, ArrayList<Course> courses) throws IOException{
+		FileWriter fstream = new FileWriter(file);
+		BufferedWriter bw = new BufferedWriter(fstream);
+		if (file == null){
+			return;
+		}
+		for(int i = 0 ; i < courses.size(); i++)  {	
+			bw.write(courses.get(i).toFile());
+		}
+		bw.close();
+	}	
 }
 
 
