@@ -1,5 +1,7 @@
 package schedutron;
 import java.awt.MenuBar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -13,20 +15,20 @@ public class MainMenuBar extends JMenuBar{
   filemenu.add(new JSeparator());
   JMenu editmenu = new JMenu("Edit");
   editmenu.add(new JSeparator());
-  JMenuItem fileItem1 = new JMenuItem("New");
-  JMenuItem fileItem2 = new JMenuItem("Open");
-  JMenuItem fileItem3 = new JMenuItem("Close");
-  fileItem3.add(new JSeparator());
-  JMenuItem fileItem4 = new JMenuItem("Save");
+  JMenuItem newItem = new JMenuItem("New");
+  JMenuItem openItem = new JMenuItem("Open");
+  JMenuItem closeItem = new JMenuItem("Close");
+  closeItem.add(new JSeparator());
+  JMenuItem saveItem = new JMenuItem("Save");
   JMenuItem editItem1 = new JMenuItem("Cut");
   JMenuItem editItem2 = new JMenuItem("Copy");
   editItem2.add(new JSeparator());
   JMenuItem editItem3 = new JMenuItem("Paste");
   JMenuItem editItem4 = new JMenuItem("Insert");
-  filemenu.add(fileItem1);
-  filemenu.add(fileItem2);
-  filemenu.add(fileItem3);
-  filemenu.add(fileItem4);
+  filemenu.add(newItem);
+  filemenu.add(openItem);
+  filemenu.add(closeItem);
+  filemenu.add(saveItem);
   editmenu.add(editItem1);
   editmenu.add(editItem2);
   editmenu.add(editItem3);
@@ -36,5 +38,50 @@ public class MainMenuBar extends JMenuBar{
 //  frame.setJMenuBar(menubar);
 //  frame.setSize(400,400);
 //  frame.setVisible(true);
-  }
+  
+
+  
+  newItem.addActionListener(new ActionListener()
+  {
+	public void actionPerformed(ActionEvent arg0)
+
+	{
+		System.out.println("You clicked on the new action");
+	} 
+
+  });
+  
+  
+  openItem.addActionListener(new ActionListener()
+  {
+	public void actionPerformed(ActionEvent arg0)
+
+	{
+		System.out.println("You clicked on the open action");
+	} 
+
+  });
+  
+  closeItem.addActionListener(new ActionListener()
+  {
+	public void actionPerformed(ActionEvent arg0)
+
+	{
+		System.out.println("You clicked on the close action");
+	} 
+
+  });
+  
+  saveItem.addActionListener(new ActionListener()
+  {
+	public void actionPerformed(ActionEvent arg0)
+
+	{
+		System.out.println("You clicked on the save action");
+	} 
+
+  });
+
+  
+  } 
 }

@@ -220,10 +220,16 @@ public class MainWindow extends JFrame {
         if (e.getValueIsAdjusting() == false) {
           if (((JList<Course>)e.getSource()).getSelectedIndex() == -1) {
           } else {
-            JList<Course> ret_list = (JList<Course>)e.getSource();
-            Course newcourse = ret_list.getSelectedValue();
-            classSelector.takencourses.add(newcourse);
-            drawCourses();
+	            JList<Course> ret_list = (JList<Course>)e.getSource();
+	            Course newcourse = ret_list.getSelectedValue();
+				if (!ClassSelectorModel.scheduleConflicts(
+						ClassSelectorModel.listmodel_right,newcourse)
+						)
+			{
+
+	            classSelector.takencourses.add(newcourse);
+	            drawCourses();
+			}
           }
         }
       }
@@ -265,6 +271,7 @@ public class MainWindow extends JFrame {
 							ClassSelectorModel.listmodel_right,newcourse)
 							)
 					{
+						
 						drawCourses();
 					}
 				}
@@ -273,8 +280,7 @@ public class MainWindow extends JFrame {
 		
 	}
   
-  // TODO: Handle button clicks, etc.
-  
+
 	public static <Course> Course[] concatCourses(Course[] first, Course[] second) {
 		  Course[] result = Arrays.copyOf(first, first.length + second.length);
 		  System.arraycopy(second, 0, result, first.length, second.length);

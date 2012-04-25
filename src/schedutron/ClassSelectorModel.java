@@ -191,7 +191,6 @@ public class ClassSelectorModel implements ListSelectionModel{
 			if (e.getValueIsAdjusting() == false) {
 				if (list_right.getSelectedIndex() == -1) {
 				} else {
-
 					JList<Course> ret_list = (JList<Course>)e.getSource();
 					Course newcourse = ret_list.getSelectedValue();;
 					listmodel_left.addElement(newcourse);
@@ -199,10 +198,8 @@ public class ClassSelectorModel implements ListSelectionModel{
 					takencourses.remove(newcourse);
 				}
 			}
-
 		}
 	}
-
 
 
 	@Override
@@ -219,7 +216,6 @@ public class ClassSelectorModel implements ListSelectionModel{
 	    this.addListDeselectionListener(new CourseDeselectorListener());
 
 	}
-	
 	@Override
 	public void addSelectionInterval(int index0, int index1) {
 		// TODO Auto-generated method stub
