@@ -2,7 +2,6 @@ package schedutron;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.Scrollbar;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -10,8 +9,8 @@ import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
@@ -43,7 +42,8 @@ public class ClassSelectorModel implements ListSelectionModel{
     ArrayList<Course> mcourses = new ArrayList<Course>();
     /** List of courses that are being taken */
     public ArrayList<Course> takencourses;
-    
+    /** Window to notify when updated */
+    public schedutron.MainWindow listeningWindow;
 
       
 	public ClassSelectorModel(ArrayList<Course> courses) {
@@ -166,10 +166,19 @@ public class ClassSelectorModel implements ListSelectionModel{
 				} else {
 					JList<Course> ret_list = (JList<Course>)e.getSource();
 					Course newcourse = ret_list.getSelectedValue();
-					if (!scheduleConflicts(listmodel_right,newcourse)){
+					if (!newcourse.ConflictsWith(takencourses)) {
 						listmodel_right.addElement(newcourse);
-						listmodel_left.removeElement(newcourse);  
+						listmodel_left.removeElement(newcourse);
+						takencourses.add(newcourse);
+						listeningWindow.updateInformation();
+						// TODO: is there some way to iterate through all the courses? takencourses seems redundant
+					} else {
+						ret_list.clearSelection(); //Otherwise, it will stay selected and be irritating to try adding again.
+						String errorMsg = "This course conflicts with your current schedule:" + newcourse.getNumber();
+						JOptionPane.showMessageDialog(listeningWindow, errorMsg);
+						System.out.println("Courses conflict!");
 					}
+					
 
 				}
 			}
@@ -203,6 +212,8 @@ public class ClassSelectorModel implements ListSelectionModel{
 					Course newcourse = ret_list.getSelectedValue();;
 					listmodel_left.addElement(newcourse);
 					listmodel_right.removeElement(newcourse);
+					takencourses.remove(newcourse);
+					listeningWindow.updateInformation();
 				}
 			}
 		}
@@ -337,6 +348,9 @@ public class ClassSelectorModel implements ListSelectionModel{
 		
 	}
 	
+	public void addListeningWindow(MainWindow listeningWindow) {
+		this.listeningWindow = listeningWindow;
+	}
 
 
 }
