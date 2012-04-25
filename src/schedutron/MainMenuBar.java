@@ -3,6 +3,7 @@ import java.awt.MenuBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -68,12 +69,16 @@ public class MainMenuBar extends JMenuBar{
 			  System.out.println("You chose to open this file: " +
 		    		chooser.getSelectedFile().getName());
 			  FileManager fman = new FileManager();
+			ArrayList<Course> courses = null;
 			  try {
-				fman.getClassesFromFile(chooser.getSelectedFile());
+				  courses = fman.getClassesFromFile(chooser.getSelectedFile());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			  ClassSelectorModel.emptyLists();
+			  ClassSelectorModel.addToLeftList(courses);
+			  
 		  }
 	  } 
 

@@ -58,7 +58,7 @@ public class ClassSelectorModel implements ListSelectionModel{
 
 		    listmodel_left = new DefaultListModel<Course>();
 			Course[] courseArray = new Course[mcourses_left.size()];
-		    addToListModel(mcourses_left.toArray(courseArray));
+		    addToLeftListModel(mcourses_left.toArray(courseArray));
 		    
 		    list_left = new JList<Course>(listmodel_left);
 		    list_left.setLayoutOrientation(JList.VERTICAL);
@@ -101,15 +101,27 @@ public class ClassSelectorModel implements ListSelectionModel{
 	}
 	
 	
-	private void addToListModel(Course[] arr_courses){
-		for(Course c : arr_courses){
-			listmodel_left.addElement(c);
-		}
+	public static void addToLeftList(ArrayList<Course> mcourses_left){ 
+		Course[] courseArray = new Course[mcourses_left.size()];
+	    addToLeftListModel(mcourses_left.toArray(courseArray));
 	}
 	
-	private void addToSelectedListModel(Course[] arr_courses){
+	public static void emptyLeftList(){
+		listmodel_left.removeAllElements();
+	}
+	
+	public static void emptyRightList(){
+		listmodel_right.removeAllElements();
+	}
+	
+	public static void emptyLists(){
+		emptyLeftList();
+		emptyRightList();
+	}	
+
+	private static void addToLeftListModel(Course[] arr_courses){
 		for(Course c : arr_courses){
-			listmodel_right.addElement(c);
+			listmodel_left.addElement(c);
 		}
 	}
 	

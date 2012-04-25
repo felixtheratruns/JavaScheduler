@@ -198,7 +198,7 @@ public class MainWindow extends JFrame {
     ArrayList<Course> unselected_courses = null;
 
     FileManager fileMan = new FileManager();
-    unselected_courses = fileMan.makeClasses();
+    unselected_courses = fileMan.getAllClassesInData();
 
 
     generateList();
