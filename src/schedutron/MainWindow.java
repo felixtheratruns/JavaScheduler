@@ -105,21 +105,21 @@ public class MainWindow extends JFrame {
   }
 
   private void drawCourses() {
-	int numRows = 24;     // TODO: Put us somewhere nicer
-	int numCols = 7;
-	if (cells != null) {
-	  for (int row = 1; row <= numRows; row++) {
-		  for (int col = 1; col <= numCols; col++) {
-			  panel.remove(cells[row-1][col-1]);
-		  }
-	  }
-	}
-	for (JLabel l : courseLabels) {
-	  panel.remove(l);
-	}
-	panel.revalidate();
-	//FIXME: This needs to remove old contents, was originally coded to be
-	//drawn once. Needs to draw multiple times.
+    int numRows = 24;
+    int numCols = 7;
+    if (cells != null) {
+      for (int row = 1; row <= numRows; row++) {
+        for (int col = 1; col <= numCols; col++) {
+          panel.remove(cells[row-1][col-1]);
+        }
+      }
+    }
+    for (JLabel l : courseLabels) {
+      panel.remove(l);
+    }
+    panel.revalidate();
+    //FIXME: This needs to remove old contents, was originally coded to be
+    //drawn once. Needs to draw multiple times.
     Calendar calendar = Calendar.getInstance();
     GridBagConstraints c = new GridBagConstraints();
     c.fill = GridBagConstraints.BOTH;
@@ -143,37 +143,36 @@ public class MainWindow extends JFrame {
       System.out.println(course.getTitle());
       //temporary check
       if (null != course.getTimes()){
-	      for (TimeBlock time : course.getTimes()) {
-	        Color color = palette[classSelector.takencourses.indexOf(course) % palette.length];
-	        String dayCodes = "SMTWRFU";
-	        System.out.println("time.getStart(): " + time.getStart());
-	        calendar.setTime(time.getStart());
-	        int startHr = calendar.get(Calendar.HOUR_OF_DAY);
-	        calendar.setTime(time.getEnd());
-	        // offset by -1 minutes so times on the hour don't fill in end hours
-	        // (ie. prevent an event that ends at 12 from looking like it ends at 1)
-	        calendar.add(Calendar.MINUTE, -1);
-	        // TODO: Better rounding method? Should a course that ends at 12:05 
-	        // render as ending at 12:00 or 1:00? Or should we change the division
-	        // to 30 minutes to avoid (at least for most purposes at U of L) this 
-	        // problem?
-	        int endHr = calendar.get(Calendar.HOUR_OF_DAY);
-	        // TODO: Use better name than c... names from online examples suck!
-	        c.gridx = dayCodes.indexOf(time.getDay()) + 1;
-	        c.gridy = startHr + 1;
-	        c.gridheight = (endHr - startHr) + 1;
-	        c.fill = GridBagConstraints.BOTH;
-	        for (int row = c.gridy; row < c.gridy + c.gridheight; row++) {
-	        	panel.remove(cells[row-1][c.gridx-1]);
-	        }
-	        JLabel label = new JLabel(course.getNumber(), JLabel.CENTER);
-	        courseLabels.add(label);
-	        label.setBackground(color); 
-	        label.setBorder(BorderFactory.createMatteBorder(1,1,0,0,Color.BLACK));
-	        label.setOpaque(true);
-	        panel.add(label, c);
-	      }
-	      panel.revalidate();
+      for (TimeBlock time : course.getTimes()) {
+        Color color = palette[classSelector.takencourses.indexOf(course) % palette.length];
+        String dayCodes = "UMTWRFS";
+        calendar.setTime(time.getStart());
+        int startHr = calendar.get(Calendar.HOUR_OF_DAY);
+        calendar.setTime(time.getEnd());
+        // offset by -1 minutes so times on the hour don't fill in end hours
+        // (ie. prevent an event that ends at 12 from looking like it ends at 1)
+        calendar.add(Calendar.MINUTE, -1);
+        // TODO: Better rounding method? Should a course that ends at 12:05 
+        // render as ending at 12:00 or 1:00? Or should we change the division
+        // to 30 minutes to avoid (at least for most purposes at U of L) this 
+        // problem?
+        int endHr = calendar.get(Calendar.HOUR_OF_DAY);
+        // TODO: Use better name than c... names from online examples suck!
+        c.gridx = dayCodes.indexOf(time.getDay()) + 1;
+        c.gridy = startHr + 1;
+        c.gridheight = (endHr - startHr) + 1;
+        c.fill = GridBagConstraints.BOTH;
+        for (int row = c.gridy; row < c.gridy + c.gridheight; row++) {
+        	panel.remove(cells[row-1][c.gridx-1]);
+        }
+        JLabel label = new JLabel(course.getNumber(), JLabel.CENTER);
+        courseLabels.add(label);
+        label.setBackground(color); 
+        label.setBorder(BorderFactory.createMatteBorder(1,1,0,0,Color.BLACK));
+        label.setOpaque(true);
+        panel.add(label, c);
+      }
+      panel.revalidate();
       }
     }
   }
@@ -191,6 +190,7 @@ public class MainWindow extends JFrame {
   }
   
   public MainWindow() throws IOException {
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     panel = new JPanel(new GridBagLayout());
     courseLabels = new ArrayList<JLabel>();
     schedule = new Schedule(); //TODO: Remove me
@@ -211,7 +211,39 @@ public class MainWindow extends JFrame {
     classSelector.addListeners();
     classSelector.setPanel(selector_panel);
     generateGrid();
-    classSelector.addListSelectionListener(new ScheduleListener());
+
+    classSelector.list_left.addListSelectionListener(new ListSelectionListener() {
+      // TODO: This is getting big, refactor to class, or pull the 
+      // CourseSelectorListener class out of ClassSelectorModel
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting() == false) {
+          if (((JList<Course>)e.getSource()).getSelectedIndex() == -1) {
+          } else {
+            JList<Course> ret_list = (JList<Course>)e.getSource();
+            Course newcourse = ret_list.getSelectedValue();
+            classSelector.takencourses.add(newcourse);
+            drawCourses();
+          }
+        }
+      }
+    });
+    classSelector.list_right.addListSelectionListener(new ListSelectionListener() {
+      // TODO: This is getting big, refactor to class, or pull the 
+      // CourseSelectorListener class out of ClassSelectorModel
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting() == false) {
+          if (((JList<Course>)e.getSource()).getSelectedIndex() == -1) {
+          } else {
+            JList<Course> ret_list = (JList<Course>)e.getSource();
+            Course newcourse = ret_list.getSelectedValue();
+            classSelector.takencourses.remove(newcourse);
+            drawCourses();
+          }
+        }
+      }
+    });
     this.add(selector_panel, BorderLayout.EAST);
     pack();
   }

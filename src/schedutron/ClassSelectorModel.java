@@ -44,6 +44,7 @@ public class ClassSelectorModel implements ListSelectionModel{
     /** List of courses that are being taken */
     public ArrayList<Course> takencourses;
     
+
       
 	public ClassSelectorModel(ArrayList<Course> courses) {
 
@@ -160,6 +161,7 @@ public class ClassSelectorModel implements ListSelectionModel{
 						listmodel_left.removeElement(newcourse);  
 						takencourses.add(newcourse);
 					}
+
 				}
 			}
 		}
