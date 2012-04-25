@@ -58,6 +58,8 @@ public class FileManager {
 	public ArrayList<Course> getClassesFromFile(File file) throws IOException{
 		BufferedReader br = getBufferedReader(file);
 		String strLine;
+		ArrayList<Course> courses = new ArrayList<Course>();
+
 		while ((strLine = br.readLine()) != null)   {
 			ArrayList<String> line_elements = new ArrayList<String>();
 	
@@ -73,7 +75,7 @@ public class FileManager {
 					els.add(line[a]);
 				}
 				Course course = new Course(els);
-				courseList.add(course);
+				courses.add(course);
 			} else {
 				System.out.println("not 13 long");
 				for(String el : line){
@@ -81,7 +83,7 @@ public class FileManager {
 				}
 			}
 		}
-		return courseList;
+		return courses;
 	}
 
 }
